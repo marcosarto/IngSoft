@@ -12,7 +12,7 @@ public class Interazione {
             System.out.println(i + ". " + entrate[i-1]);
 
         do {
-            System.out.print("Seleziona entrata : ");
+            System.out.print(domanda);
             menuItem = Integer.valueOf(in.nextLine());
         } while (!(menuItem>=0 && menuItem<=entrate.length));
 

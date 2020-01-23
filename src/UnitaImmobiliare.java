@@ -66,7 +66,7 @@ public class UnitaImmobiliare {
 
             int stanzaDaAbbinare = Interazione.interrogazione
                     ("In quale stanza vuoi aggiungere l'artefatto " +
-                                    "(se non si seleziona nessuna stanza verra` abbinato all'esterno)",
+                                    "(se non si seleziona nessuna stanza verra` abbinato all'esterno)(0 per nessuna stanza)",
                             stanze.toArray(new String[0])
                     );
             switch (stanzaDaAbbinare) {
@@ -206,7 +206,7 @@ public class UnitaImmobiliare {
     private Attuatore creaAttuatore(){
         String nome = Interazione.domanda("Nome fantasia attuatore");
         String[] nomiCat = new String[SistemaDomotico.categorieAttuatori.size()];
-        for (int i = 0; i < nomiCat.length; i++) {
+        for (int i = 0; i < SistemaDomotico.categorieAttuatori.size(); i++) {
             nomiCat[i] = SistemaDomotico.categorieAttuatori.get(i).getNome();
         }
         int cat = Interazione.interrogazione("Scegli la categoria dell'attuatore", nomiCat);
@@ -222,20 +222,42 @@ public class UnitaImmobiliare {
     }
 
     private void stampaAlberoUnitaImmobiliare() {
+
         StringBuilder tree = new StringBuilder();
-        tree.append(nomeUnitaImmobiliare+"\n");
+        tree.append("Nome unita immobiliare :"+nomeUnitaImmobiliare+"\n\n");
         for (Stanza s :
                 stanze) {
-            tree.append("\t" + s.getNome()+"\n");
+            tree.append("\tCategorie sensori nella stanza " + s.getNome()+"\n");
             for (String sensore :
                     s.getCategoriaSensoriPresenti()) {
                 tree.append("\t\t" + sensore+"\n");
             }
+            tree.append("\n");
+            tree.append("\tCategorie attuatori nella stanza " + s.getNome()+"\n");
             for (String attuatore :
                     s.getCategoriaAttuatoriPresenti()) {
                 tree.append("\t\t" + attuatore+"\n");
             }
+            tree.append("\n");
+            for (Artefatto a :
+                    s.getArtefatti()) {
+                tree.append("\tCategorie sensori dell'artefatto " + a.getNome()+" nella stanza\n");
+                for (String sensore :
+                        s.getCategoriaSensoriPresenti()) {
+                    tree.append("\t\t" + sensore + "\n");
+                }
+                tree.append("\tCategorie attuatori dell'artefatto " + a.getNome()+" nella stanza\n");
+                for (String attuatore :
+                        s.getCategoriaAttuatoriPresenti()) {
+                    tree.append("\t\t" + attuatore + "\n");
+                }
+            }
         }
         System.out.println(tree.toString());
     }
+
+    public String getNomeUnitaImmobiliare() {
+        return nomeUnitaImmobiliare;
+    }
 }
+

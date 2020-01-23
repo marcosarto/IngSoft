@@ -43,7 +43,7 @@ public class SistemaDomotico {
             return -1;
         }
         for(int i=0;i<entrateUnitaImmobiliare.length;i++){
-            entrateUnitaImmobiliare[i]=unitaImmobiliari.get(i).toString();
+            entrateUnitaImmobiliare[i]=unitaImmobiliari.get(i).getNomeUnitaImmobiliare();
         }
 
         int risposta = Interazione.interrogazione("Seleziona l'unita' immobiliare che vuoi ispezionare :",
@@ -143,7 +143,8 @@ public class SistemaDomotico {
                     break;
                 case 3:
                     int numeroUnitaImm = visualizzaElencoUnitaImmobiliari();
-                    unitaImmobiliari.get(numeroUnitaImm).flussoManutentore();
+                    if(numeroUnitaImm!=-1)
+                        unitaImmobiliari.get(numeroUnitaImm).flussoManutentore();
                     break;
                 default:
                     esci = true;
