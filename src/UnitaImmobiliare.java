@@ -5,19 +5,19 @@ import Contenitori.Attuatore;
 import Contenitori.Sensore;
 import Contenitori.Stanza;
 import Utility.Interazione;
-
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UnitaImmobiliare {
     private String nomeUnitaImmobiliare, tipoUnitaImmobiliare;
-    private ArrayList<Stanza> stanze = new ArrayList<>();
-    private Stanza esterno = new Stanza("Esterno");
+    private HashMap<String, Stanza> stanze = new HashMap<>();
+    private HashMap<String, Stanza> artefatti = new HashMap<>();//chiave nome artefatto valore stanza associata
 
     public UnitaImmobiliare() {
         String nome = Interazione.domanda("Nome dell'unita immobiliare?");
         this.nomeUnitaImmobiliare = nome;
         String tipo = Interazione.domanda("Tipologia unita immobiliare?");
         this.tipoUnitaImmobiliare = tipo;
+        stanze.put("Esterno", new Stanza("Esterno"));
         int risposta = Interazione.interrogazione
                 ("Bisogna aggiungere almeno una stanza o un artefatto," +
                                 " (nel seguito se ne potranno aggiungere altri)",
@@ -34,53 +34,42 @@ public class UnitaImmobiliare {
     }
 
     public void aggiungiStanza() {
+        String risposta = null;
         do {
-            String stanza = Interazione.domanda("Inserisci nome stanza(0 per uscire) : ");
-            if (stanza.equals("0")) break;
-
-
-            boolean esiste = false;
+            String stanza = Interazione.domanda("Inserisci nome stanza : ");
 
             //Se c'e` gia almeno una stanza controlla che il nome non sia duplicato
-            if (stanze.size() != 0) {
-                for (Stanza s :
-                        stanze) {
-                    if (s.getNome().equals(stanza))
-                        esiste = true;
-                }
-                if (esiste) {
-                    System.out.println("Nome stanza gia esistente, non aggiunta");
-                    continue;
-                }
+            if (stanze.containsKey(stanza)) {
+                System.out.println("Nome stanza gia esistente, non aggiunta");
+                continue;
             }
 
-            if (!esiste) stanze.add(new Stanza(stanza));
+            stanze.put(stanza, new Stanza(stanza));
 
-        } while (true);
+            risposta = Interazione.domanda("Vuoi uscire? (y/any key) : ");
+
+        } while (!risposta.equals("y"));
     }
 
     public void aggiungiArtefatto() {
+        String risposta = null;
         do {
-            String artefatto = Interazione.domanda("Inserisci nome artefatto(0 per uscire) : ");
-            if (artefatto.equals("0")) break;
+
+            String artefatto = Interazione.domanda("Inserisci nome artefatto : ");
+
+            String[] elencoStanze = stanze.keySet().toArray(new String[0]);
 
             int stanzaDaAbbinare = Interazione.interrogazione
-                    ("In quale stanza vuoi aggiungere l'artefatto " +
-                                    "(se non si seleziona nessuna stanza verra` abbinato all'esterno)(0 per nessuna stanza)",
-                            stanze.toArray(new String[0])
-                    );
-            switch (stanzaDaAbbinare) {
-                case -1:
-                    if (!esterno.aggiungiArtefatto(artefatto))
-                        System.out.println("Artefatto con questo nome gia` esistente nell'esterno");
-                    break;
-                default:
-                    boolean successo = stanze.get(stanzaDaAbbinare).aggiungiArtefatto(artefatto);
-                    if (!successo)
-                        System.out.println("Il nome dell'artefatto esiste gia` in questa stanza");
-            }
+                    ("In quale stanza vuoi aggiungere l'artefatto ", elencoStanze);
 
-        } while (true);
+            if (!stanze.get(elencoStanze[stanzaDaAbbinare]).aggiungiArtefatto(artefatto))
+                System.out.println("Artefatto gia esistente in questa stanza");
+            else
+                artefatti.put(artefatto, stanze.get(elencoStanze[stanzaDaAbbinare]));
+
+            risposta = Interazione.domanda("Vuoi uscire? (y/any key) : ");
+
+        } while (!risposta.equals("y"));
 
     }
 
@@ -133,63 +122,54 @@ public class UnitaImmobiliare {
         int risposta = Interazione.interrogazione("Dove vuoi posizionare il sensore?",
                 new String[]{"Artefatto", "Stanza"});
         if (risposta == 0) {
-            risposta = Interazione.interrogazione("Su quale artefatto? " +
-                            "(Siamo nell` esterno della abitazione se non e` questo il luogo che " +
-                            "contiene l'artefatto voluto passare alla prossima con 0)",
-                    esterno.visualizzaArtefatti());
-            if (risposta != -1) {
-                esterno.aggiungiSensoreSuArtefatto(risposta, creaSensore());
+            StringBuilder st = new StringBuilder();
+            st.append("Scegli il l'artefatto (inserisci il nome) : "+"\n");
+            for (String s : artefatti.keySet()) {
+                st.append(s + "\n");
             }
-            for (Stanza s :
-                    stanze) {
-                risposta = Interazione.interrogazione("Su quale artefatto? " +
-                                "(Siamo nella stanza " + s.getNome() + " se non e` questa la stanza che " +
-                                "contiene l'artefatto voluto passare alla prossima con 0)",
-                        s.visualizzaArtefatti());
-                if (risposta != -1) {
-                    s.aggiungiSensoreSuArtefatto(risposta, creaSensore());
-                }
+            String artefattoScelto = Interazione.domanda(st.toString());
+            if(!artefatti.containsKey(artefattoScelto))
+                System.out.println("Nome non corretto o non esistenete");
+            else{
+                if(!artefatti.get(artefattoScelto).aggiungiSensore(creaSensore()))
+                    System.out.println("C'e` gia un sensore di questa categoria!");
             }
+
         } else {
-            String[] nomiStanze = new String[stanze.size()];
-            for (int i = 0; i < stanze.size(); i++) {
-                nomiStanze[i] = stanze.get(i).getNome();
-            }
-            risposta = Interazione.interrogazione("In quale stanza? ", nomiStanze);
-            if (risposta != -1)
-                stanze.get(risposta).aggiungiSensore(creaSensore());
+            String[] elencoStanze = stanze.keySet().toArray(new String[0]);
+            risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze);
+            if(stanze.get(elencoStanze[risposta]).equals("Esterno"))
+                System.out.println("Non si puo` aggiungere un sensore all'esterno senza un artefatto");
+            else if(!stanze.get(elencoStanze[risposta]).aggiungiSensore(creaSensore()))
+                System.out.println("C'e` gia un sensore di questa categoria!");
         }
+
     }
 
-    private void aggingiAttuatore(){
+    private void aggingiAttuatore() {
         int risposta = Interazione.interrogazione("Dove vuoi posizionare l'attuatore?",
                 new String[]{"Artefatto", "Stanza"});
         if (risposta == 0) {
-            risposta = Interazione.interrogazione("Su quale artefatto? " +
-                            "(Siamo nell` esterno della abitazione se non e` questo il luogo che " +
-                            "contiene l'artefatto voluto passare alla prossima con 0)",
-                    esterno.visualizzaArtefatti());
-            if (risposta != -1) {
-                esterno.aggiungiAttuatoreSuArtefatto(risposta, creaAttuatore());
+            StringBuilder st = new StringBuilder();
+            st.append("Scegli il l'artefatto (inserisci il nome) : "+"\n");
+            for (String s : artefatti.keySet()) {
+                st.append(s + "\n");
             }
-            for (Stanza s :
-                    stanze) {
-                risposta = Interazione.interrogazione("Su quale artefatto? " +
-                                "(Siamo nella stanza " + s.getNome() + " se non e` questa la stanza che " +
-                                "contiene l'artefatto voluto passare alla prossima con 0)",
-                        s.visualizzaArtefatti());
-                if (risposta != -1) {
-                    s.aggiungiAttuatoreSuArtefatto(risposta, creaAttuatore());
-                }
+            String artefattoScelto = Interazione.domanda(st.toString());
+            if(!artefatti.containsKey(artefattoScelto))
+                System.out.println("Nome non corretto o non esistenete");
+            else{
+                if(!artefatti.get(artefattoScelto).aggiungiAttuatore(creaAttuatore()))
+                    System.out.println("C'e` gia un'attuatore di questa categoria!");
             }
+
         } else {
-            String[] nomiStanze = new String[stanze.size()];
-            for (int i = 0; i < stanze.size(); i++) {
-                nomiStanze[i] = stanze.get(i).getNome();
-            }
-            risposta = Interazione.interrogazione("In quale stanza? ", nomiStanze);
-            if (risposta != -1)
-                stanze.get(risposta).aggiungiAttuatore(creaAttuatore());
+            String[] elencoStanze = stanze.keySet().toArray(new String[0]);
+            risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze);
+            if(stanze.get(risposta).equals("Esterno"))
+                System.out.println("Non si puo` aggiungere un attuatore all'esterno senza un artefatto");
+            else if(!stanze.get(elencoStanze[risposta]).aggiungiAttuatore(creaAttuatore()))
+                System.out.println("C'e` gia un attuatore di questa categoria!");
         }
     }
 
@@ -200,23 +180,21 @@ public class UnitaImmobiliare {
             nomiCat[i] = SistemaDomotico.categorieSensori.get(i).getNome();
         }
         int cat = Interazione.interrogazione("Scegli la categoria del sensore", nomiCat);
-        return new Sensore((CategoriaSensore) SistemaDomotico.categorieSensori.get(cat),nome);
+        return new Sensore((CategoriaSensore) SistemaDomotico.categorieSensori.get(cat), nome);
     }
 
-    private Attuatore creaAttuatore(){
+    private Attuatore creaAttuatore() {
         String nome = Interazione.domanda("Nome fantasia attuatore");
         String[] nomiCat = new String[SistemaDomotico.categorieAttuatori.size()];
         for (int i = 0; i < SistemaDomotico.categorieAttuatori.size(); i++) {
             nomiCat[i] = SistemaDomotico.categorieAttuatori.get(i).getNome();
         }
         int cat = Interazione.interrogazione("Scegli la categoria dell'attuatore", nomiCat);
-        return new Attuatore((CategoriaAttuatore) SistemaDomotico.categorieAttuatori.get(cat),nome);
+        return new Attuatore((CategoriaAttuatore) SistemaDomotico.categorieAttuatori.get(cat), nome);
     }
 
-    private void proceduraLetturaSensori(){
-        System.out.println(esterno.getSensori());
-        for (Stanza s :
-                stanze) {
+    private void proceduraLetturaSensori() {
+        for (Stanza s : stanze.values()) {
             System.out.println(s.getSensori());
         }
     }
@@ -224,31 +202,25 @@ public class UnitaImmobiliare {
     private void stampaAlberoUnitaImmobiliare() {
 
         StringBuilder tree = new StringBuilder();
-        tree.append("Nome unita immobiliare :"+nomeUnitaImmobiliare+"\n\n");
-        for (Stanza s :
-                stanze) {
-            tree.append("\tCategorie sensori nella stanza " + s.getNome()+"\n");
-            for (String sensore :
-                    s.getCategoriaSensoriPresenti()) {
-                tree.append("\t\t" + sensore+"\n");
+        tree.append("Nome unita immobiliare :" + nomeUnitaImmobiliare + "\n\n");
+        for (Stanza s : stanze.values()) {
+            tree.append("\tCategorie sensori nella stanza " + s.getNome() + "\n");
+            for (String sensore : s.getCategoriaSensoriPresenti()) {
+                tree.append("\t\t" + sensore + "\n");
             }
             tree.append("\n");
-            tree.append("\tCategorie attuatori nella stanza " + s.getNome()+"\n");
-            for (String attuatore :
-                    s.getCategoriaAttuatoriPresenti()) {
-                tree.append("\t\t" + attuatore+"\n");
+            tree.append("\tCategorie attuatori nella stanza " + s.getNome() + "\n");
+            for (String attuatore : s.getCategoriaAttuatoriPresenti()) {
+                tree.append("\t\t" + attuatore + "\n");
             }
             tree.append("\n");
-            for (Artefatto a :
-                    s.getArtefatti()) {
-                tree.append("\tCategorie sensori dell'artefatto " + a.getNome()+" nella stanza\n");
-                for (String sensore :
-                        s.getCategoriaSensoriPresenti()) {
+            for (Artefatto a : s.getArtefatti()) {
+                tree.append("\tCategorie sensori dell'artefatto " + a.getNome() + " nella stanza\n");
+                for (String sensore : s.getCategoriaSensoriPresenti()) {
                     tree.append("\t\t" + sensore + "\n");
                 }
-                tree.append("\tCategorie attuatori dell'artefatto " + a.getNome()+" nella stanza\n");
-                for (String attuatore :
-                        s.getCategoriaAttuatoriPresenti()) {
+                tree.append("\tCategorie attuatori dell'artefatto " + a.getNome() + " nella stanza\n");
+                for (String attuatore : s.getCategoriaAttuatoriPresenti()) {
                     tree.append("\t\t" + attuatore + "\n");
                 }
             }

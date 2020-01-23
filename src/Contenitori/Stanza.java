@@ -1,41 +1,33 @@
 package Contenitori;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 public class Stanza extends Contenitore{
-    private ArrayList<Artefatto> artefatti = new ArrayList<>();
+    private HashMap<String,Artefatto> artefatti = new HashMap<>();
 
     public Stanza(String nome) {
         super(nome);
     }
 
     public boolean aggiungiArtefatto(String arteS){
-        for (Artefatto arteO :
-                artefatti) {
-            if(arteO.getNome().equals(arteS))
-                return false;
-        }
-        artefatti.add(new Artefatto(arteS));
+        if(artefatti.containsKey(arteS))
+            return false;
+        artefatti.put(arteS,new Artefatto(arteS));
         return true;
     }
 
-    public boolean aggiungiSensoreSuArtefatto(int posArtefatto,Sensore sensore){
-        return artefatti.get(posArtefatto).aggiungiSensore(sensore);
-    }
-
-    public boolean aggiungiAttuatoreSuArtefatto(int posArtefatto,Attuatore attuatore){
-        return artefatti.get(posArtefatto).aggiungiAttuatore(attuatore);
-    }
-
-    public ArrayList<Artefatto> getArtefatti() {
-        return artefatti;
+    public Collection<Artefatto> getArtefatti(){
+        return artefatti.values();
     }
 
     public String getSensori(){
         StringBuilder st = new StringBuilder();
         st.append(super.getSensori());
         for (Artefatto a :
-                artefatti) {
+                artefatti.values()) {
             st.append(a.getSensori());
         }
         return st.toString();

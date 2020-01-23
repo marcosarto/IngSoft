@@ -118,8 +118,6 @@ public class SistemaDomotico {
 
     private void flussoFruitore(){
         int numeroUnitaImmobiliare = visualizzaElencoUnitaImmobiliari();
-        if(numeroUnitaImmobiliare==-1)
-            return;
         unitaImmobiliari.get(numeroUnitaImmobiliare).flussoFruitore();
     }
 
