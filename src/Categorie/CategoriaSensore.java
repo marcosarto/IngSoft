@@ -3,17 +3,13 @@ package Categorie;
 import java.util.ArrayList;
 
 public class CategoriaSensore extends CategoriaDispositivo{
-    private ArrayList<Rilevazione> informazioni;
+    private ArrayList<Rilevazione> informazioni = new ArrayList<>();
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public CategoriaSensore(String nome) {
+        super(nome);
     }
 
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
-    }
-
-    public void setInformazioni(ArrayList<Rilevazione> informazioni) {
-        this.informazioni = informazioni;
+    public void setInformazioni(Rilevazione informazioni) {
+        this.informazioni.add(informazioni);
     }
 }

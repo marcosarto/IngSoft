@@ -1,7 +1,13 @@
 package Categorie;
 
-import java.util.ArrayList;
-
 public class CategoriaAttuatore extends CategoriaDispositivo{
-    private ArrayList<ModalitaOperativa> modalita;
+    private ModalitaOperativa modalita;
+
+    public CategoriaAttuatore(String nome) {
+        super(nome);
+    }
+
+    public void setModalita(ModalitaOperativa modalita) {
+        this.modalita = modalita;
+    }
 }

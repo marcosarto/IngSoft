@@ -2,9 +2,8 @@ package Contenitori;
 
 import Categorie.CategoriaSensore;
 
-public class Sensore {
-    private CategoriaSensore categoria;
-    private String nome;
-    //Attuatori e sensori possono appartenere a 1..n stanze OPPURE 1..n artefatti
-    private boolean appartieneStanza,appartieneArtefatto;
+public class Sensore extends Dispositivo{
+    public Sensore(CategoriaSensore categoria, String nome) {
+        super(categoria, nome);
+    }
 }
