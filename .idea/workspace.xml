@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0435b15-0de6-41b8-a8c8-e56a255c7bd8" name="Default Changelist" comment="" />
+    <list default="true" id="e0435b15-0de6-41b8-a8c8-e56a255c7bd8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/Artefatto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Artefatto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/Attuatore.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Attuatore.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/Interazione.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Interazione.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/Sensore.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Sensore.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/SistemaDomotico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/SistemaDomotico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/Stanza.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Stanza.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/UnitaImmobiliare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/UnitaImmobiliare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Artefatto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Artefatto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Attuatore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Attuatore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CategoriaAttuatore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CategoriaAttuatore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CategoriaSensore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CategoriaSensore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interazione.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sensore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sensore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SistemaDomotico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SistemaDomotico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Stanza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Stanza.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UnitaImmobiliare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UnitaImmobiliare.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +37,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1VF0yrgxaqjBQ8u1wmz4oMfOUEO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -23,10 +48,24 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="SistemaDomotico" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -42,18 +81,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -66,6 +93,19 @@
       <updated>1576833792905</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="555" y="214" width="800" height="684" key="#Project_Structure" timestamp="1579683406691">

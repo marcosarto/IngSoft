@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-public class CategoriaAttuatore {
-    private String nome,descrizione;
-    private boolean stato;
+public class CategoriaAttuatore extends CategoriaDispositivo{
     private ArrayList<ModalitaOperativa> modalita;
 }
