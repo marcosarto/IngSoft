@@ -1,3 +1,7 @@
+import Categorie.CategoriaAttuatore;
+import Categorie.CategoriaSensore;
+import Utility.Interazione;
+
 import java.util.ArrayList;
 
 public class SistemaDomotico {

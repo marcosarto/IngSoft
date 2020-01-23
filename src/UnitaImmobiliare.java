@@ -1,3 +1,7 @@
+import Contenitori.Artefatto;
+import Contenitori.Stanza;
+import Utility.Interazione;
+
 import java.util.ArrayList;
 
 public class UnitaImmobiliare {
@@ -13,7 +17,7 @@ public class UnitaImmobiliare {
         int risposta = Interazione.interrogazione
                 ("Bisogna aggiungere almeno una stanza o un artefatto," +
                         " (nel seguito se ne potranno aggiungere altri)",
-                        new String[]{"Artefatto","Stanza"});
+                        new String[]{"Contenitori.Artefatto","Contenitori.Stanza"});
 
         switch (risposta){
             case 0:

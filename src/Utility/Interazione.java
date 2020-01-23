@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package Utility;
+
 import java.util.Scanner;
 
 public class Interazione {

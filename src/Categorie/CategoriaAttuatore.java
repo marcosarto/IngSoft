@@ -1,3 +1,5 @@
+package Categorie;
+
 import java.util.ArrayList;
 
 public class CategoriaAttuatore extends CategoriaDispositivo{

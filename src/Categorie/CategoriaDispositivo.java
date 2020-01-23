@@ -1,3 +1,5 @@
+package Categorie;
+
 public abstract class CategoriaDispositivo {
     protected String nome,descrizione;
     protected boolean stato;
