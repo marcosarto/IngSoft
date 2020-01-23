@@ -1,5 +1,6 @@
 import Categorie.CategoriaAttuatore;
 import Categorie.CategoriaSensore;
+import Contenitori.Artefatto;
 import Contenitori.Attuatore;
 import Contenitori.Sensore;
 import Contenitori.Stanza;
@@ -91,7 +92,7 @@ public class UnitaImmobiliare {
                 stampaAlberoUnitaImmobiliare();
                 break;
             case 1:
-                //proceduraLetturaSensori();
+                proceduraLetturaSensori();
                 break;
         }
     }
@@ -210,6 +211,14 @@ public class UnitaImmobiliare {
         }
         int cat = Interazione.interrogazione("Scegli la categoria dell'attuatore", nomiCat);
         return new Attuatore((CategoriaAttuatore) SistemaDomotico.categorieAttuatori.get(cat),nome);
+    }
+
+    private void proceduraLetturaSensori(){
+        System.out.println(esterno.getSensori());
+        for (Stanza s :
+                stanze) {
+            System.out.println(s.getSensori());
+        }
     }
 
     private void stampaAlberoUnitaImmobiliare() {

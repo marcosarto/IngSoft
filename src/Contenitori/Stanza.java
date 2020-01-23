@@ -26,7 +26,21 @@ public class Stanza extends Contenitore{
     public boolean aggiungiAttuatoreSuArtefatto(int posArtefatto,Attuatore attuatore){
         return artefatti.get(posArtefatto).aggiungiAttuatore(attuatore);
     }
-    
+
+    public ArrayList<Artefatto> getArtefatti() {
+        return artefatti;
+    }
+
+    public String getSensori(){
+        StringBuilder st = new StringBuilder();
+        st.append(super.getSensori());
+        for (Artefatto a :
+                artefatti) {
+            st.append(a.getSensori());
+        }
+        return st.toString();
+    }
+
     public String[] visualizzaArtefatti(){
         String[] array = new String[artefatti.size()];
         for(int i=0;i<artefatti.size();i++){

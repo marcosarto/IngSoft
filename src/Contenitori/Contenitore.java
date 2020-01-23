@@ -1,11 +1,13 @@
 package Contenitori;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 public abstract class Contenitore {
     protected String nome;
-    protected ArrayList<Sensore> sensori=new ArrayList<>();
-    protected ArrayList<Attuatore> attuatori = new ArrayList<>();
+    protected HashMap<String,Sensore> sensori=new HashMap<>();
+    protected HashMap<String,Attuatore> attuatori = new HashMap<>();
     //non può esistere più di un sensore per categoria associato a ciascuna stanza o
     //artefatto;
     protected ArrayList<String> categoriaSensoriPresenti = new ArrayList<>();
@@ -18,7 +20,7 @@ public abstract class Contenitore {
     public boolean aggiungiSensore(Sensore s){
         if(categoriaSensoriPresenti.contains(s.getCategoria().getNome()))
             return false;
-        sensori.add(s);
+        sensori.put(s.getNome()+"_"+s.getCategoria(),s);
         categoriaSensoriPresenti.add(s.categoria.getNome());
         return true;
     }
@@ -26,7 +28,7 @@ public abstract class Contenitore {
     public boolean aggiungiAttuatore(Attuatore a){
         if(categoriaAttuatoriPresenti.contains(a.getCategoria().getNome()))
             return false;
-        attuatori.add(a);
+        attuatori.put(a.getNome()+"_"+a.getCategoria(),a);
         categoriaAttuatoriPresenti.add(a.getCategoria().getNome());
         return true;
     }
@@ -42,4 +44,18 @@ public abstract class Contenitore {
     public String getNome() {
         return nome;
     }
+
+    public String getSensori(){
+        StringBuilder st = new StringBuilder();
+        for (String s :
+                sensori.keySet()) {
+            st.append(st + "\n");
+        }
+        return st.toString();
+    }
+
+    public String ritornaValoreSensore(String key){
+        return sensori.get(key).getValore();
+    }
+
 }

@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Rilevazione {
     private String nome,unitaDiMisura;
-    private int valore,minimo,massimo;
+    private int minimo,massimo;
     private Random rand = new Random();
 
     public void setNome(String nome) {

@@ -12,4 +12,8 @@ public class CategoriaSensore extends CategoriaDispositivo{
     public void setInformazioni(Rilevazione informazioni) {
         this.informazioni.add(informazioni);
     }
+
+    public String getValore(){
+        return informazioni.get(0).getValore();
+    }
 }

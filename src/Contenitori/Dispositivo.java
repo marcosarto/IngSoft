@@ -11,6 +11,10 @@ public abstract class Dispositivo {
         this.nome = nome;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public CategoriaDispositivo getCategoria() {
         return categoria;
     }
