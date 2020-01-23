@@ -1,9 +1,7 @@
 package Contenitori;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 public class Stanza extends Contenitore{
     private HashMap<String,Artefatto> artefatti = new HashMap<>();
@@ -31,14 +29,6 @@ public class Stanza extends Contenitore{
             st.append(a.getSensori());
         }
         return st.toString();
-    }
-
-    public String[] visualizzaArtefatti(){
-        String[] array = new String[artefatti.size()];
-        for(int i=0;i<artefatti.size();i++){
-            array[i]=artefatti.get(i).getNome();
-        }
-        return array;
     }
 
 }

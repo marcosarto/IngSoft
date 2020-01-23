@@ -9,7 +9,7 @@ public class Interazione {
 
     public static int interrogazione(String domanda,String[] entrate){
         int menuItem;
-
+        System.out.println(DELIMITATORE);
         for (int i = 1; i <= entrate.length; i++)
             System.out.println(i + ". " + entrate[i-1]);
 
@@ -24,6 +24,7 @@ public class Interazione {
     }
 
     public static String domanda(String domanda){
+        System.out.println(DELIMITATORE);
         System.out.println(domanda+" ");
         String risposta = in.nextLine();
         System.out.println(DELIMITATORE);

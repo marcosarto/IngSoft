@@ -219,6 +219,7 @@ public class UnitaImmobiliare {
                 for (String sensore : s.getCategoriaSensoriPresenti()) {
                     tree.append("\t\t" + sensore + "\n");
                 }
+                tree.append("\n");
                 tree.append("\tCategorie attuatori dell'artefatto " + a.getNome() + " nella stanza\n");
                 for (String attuatore : s.getCategoriaAttuatoriPresenti()) {
                     tree.append("\t\t" + attuatore + "\n");
