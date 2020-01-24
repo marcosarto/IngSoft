@@ -15,7 +15,11 @@ public class Interazione {
 
         do {
             System.out.print(domanda+" ");
-            menuItem = Integer.valueOf(in.nextLine());
+            try {
+                menuItem = Integer.valueOf(in.nextLine());
+            }catch(Exception e){
+                return -1;
+            }
             System.out.println(DELIMITATORE);
 
         } while (!(menuItem>=0 && menuItem<=entrate.length));

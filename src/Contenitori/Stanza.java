@@ -1,9 +1,10 @@
 package Contenitori;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class Stanza extends Contenitore{
+public class Stanza extends Contenitore implements Serializable {
     private HashMap<String,Artefatto> artefatti = new HashMap<>();
 
     public Stanza(String nome) {

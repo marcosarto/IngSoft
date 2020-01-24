@@ -1,30 +1,36 @@
 import Categorie.*;
 import Utility.Interazione;
 
+import java.io.*;
 import java.util.ArrayList;
 
-public class SistemaDomotico {
+public class SistemaDomotico implements Serializable {
 
     ArrayList<UnitaImmobiliare> unitaImmobiliari = new ArrayList();
-    static ArrayList<CategoriaDispositivo> categorieSensori = new ArrayList();
-    static ArrayList<CategoriaDispositivo> categorieAttuatori = new ArrayList();
-
-    public static void main(String[] args) {new SistemaDomotico();}
+    ArrayList<CategoriaDispositivo> categorieSensori = new ArrayList();
+    ArrayList<CategoriaDispositivo> categorieAttuatori = new ArrayList();
 
     public SistemaDomotico() {
-
-        int risposta = Interazione.interrogazione("Seleziona la modalita` operativa",
-                new String[]{"Utente", "Manutentore"});
-
-        switch (risposta) {
-            case 0:
-                flussoFruitore();
-                break;
-            case 1:
-                flussoManutentore();
-                break;
-        }
+        init();
     }
+
+    public void init() {
+        String uscita = null;
+        do {
+            int risposta = Interazione.interrogazione("Seleziona la modalita` operativa",
+                    new String[]{"Utente", "Manutentore"});
+
+            switch (risposta) {
+                case 0:
+                    flussoFruitore();
+                    break;
+                case 1:
+                    flussoManutentore();
+                    break;
+            }
+            uscita = Interazione.domanda("Vuoi uscire (y/any key) : ");
+        }while (!uscita.equals("y"));
+}
 
     public void aggiungiUnitaImmobiliare(){
         if(unitaImmobiliari.size()<1) {
@@ -104,6 +110,7 @@ public class SistemaDomotico {
         }while(!risposta.equals("0"));
         if(nessunoStato)
             modalitaOperativa.aggiungiStato(categoriaAttuatore.getPrimoCampo());
+        categorieAttuatori.add(categoriaAttuatore);
         return true;
     }
 
@@ -117,8 +124,13 @@ public class SistemaDomotico {
     }
 
     private void flussoFruitore(){
-        int numeroUnitaImmobiliare = visualizzaElencoUnitaImmobiliari();
-        unitaImmobiliari.get(numeroUnitaImmobiliare).flussoFruitore();
+        if(unitaImmobiliari.size()==0){
+            System.out.println("Non e` ancora stata creata nessuna unita` immobiliare, contatta il manutentore");
+        }
+        else {
+            int numeroUnitaImmobiliare = visualizzaElencoUnitaImmobiliari();
+            unitaImmobiliari.get(numeroUnitaImmobiliare).flussoFruitore(this);
+        }
     }
 
     private void flussoManutentore(){
@@ -142,11 +154,19 @@ public class SistemaDomotico {
                 case 3:
                     int numeroUnitaImm = visualizzaElencoUnitaImmobiliari();
                     if(numeroUnitaImm!=-1)
-                        unitaImmobiliari.get(numeroUnitaImm).flussoManutentore();
+                        unitaImmobiliari.get(numeroUnitaImm).flussoManutentore(this);
                     break;
                 default:
                     esci = true;
             }
         }while (!esci);
+    }
+
+    public ArrayList<CategoriaDispositivo> getCategorieSensori() {
+        return categorieSensori;
+    }
+
+    public ArrayList<CategoriaDispositivo> getCategorieAttuatori() {
+        return categorieAttuatori;
     }
 }

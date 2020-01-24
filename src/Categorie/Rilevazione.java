@@ -1,10 +1,10 @@
 package Categorie;
-import java.util.Random;
+import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class Rilevazione {
+public class Rilevazione implements Serializable {
     private String nome,unitaDiMisura;
     private int minimo,massimo;
-    private Random rand = new Random();
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -27,6 +27,6 @@ public class Rilevazione {
     }
 
     private int generaValore(){
-        return rand.nextInt(50);
+        return ThreadLocalRandom.current().nextInt(minimo, massimo + 1);
     }
 }

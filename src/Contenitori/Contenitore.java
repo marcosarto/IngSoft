@@ -1,10 +1,10 @@
 package Contenitori;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
-public abstract class Contenitore {
+public abstract class Contenitore implements Serializable {
     protected String nome;
     protected HashMap<String,Sensore> sensori=new HashMap<>();
     protected HashMap<String,Attuatore> attuatori = new HashMap<>();

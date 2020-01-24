@@ -2,7 +2,9 @@ package Contenitori;
 
 import Categorie.CategoriaDispositivo;
 
-public abstract class Dispositivo {
+import java.io.Serializable;
+
+public abstract class Dispositivo implements Serializable {
     protected CategoriaDispositivo categoria;
     protected String nome;
 

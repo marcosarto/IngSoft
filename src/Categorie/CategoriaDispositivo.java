@@ -1,6 +1,8 @@
 package Categorie;
 
-public abstract class CategoriaDispositivo {
+import java.io.Serializable;
+
+public abstract class CategoriaDispositivo implements Serializable {
     protected String nome,descrizione;
     protected boolean stato;
 

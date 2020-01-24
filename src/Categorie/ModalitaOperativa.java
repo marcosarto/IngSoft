@@ -1,8 +1,9 @@
 package Categorie;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ModalitaOperativa {
+public class ModalitaOperativa implements Serializable {
     private String nome;
     private ArrayList<String> stati = new ArrayList<>();
     //private int parametro; // non prima versione

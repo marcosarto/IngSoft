@@ -7,10 +7,11 @@ import Contenitori.Stanza;
 import Utility.Interazione;
 import java.util.HashMap;
 
-public class UnitaImmobiliare {
+public class UnitaImmobiliare implements java.io.Serializable{
     private String nomeUnitaImmobiliare, tipoUnitaImmobiliare;
     private HashMap<String, Stanza> stanze = new HashMap<>();
     private HashMap<String, Stanza> artefatti = new HashMap<>();//chiave nome artefatto valore stanza associata
+    private SistemaDomotico sistemaDomotico;
 
     public UnitaImmobiliare() {
         String nome = Interazione.domanda("Nome dell'unita immobiliare?");
@@ -73,7 +74,8 @@ public class UnitaImmobiliare {
 
     }
 
-    public void flussoFruitore() {
+    public void flussoFruitore(SistemaDomotico sistemaDomotico) {
+        this.sistemaDomotico = sistemaDomotico;
         int risposta = Interazione.interrogazione("Cosa vuoi fare?",
                 new String[]{"Visualizza piantina unita' immobiliare", "Visualizza valori di sensori specifici"});
         switch (risposta) {
@@ -86,7 +88,8 @@ public class UnitaImmobiliare {
         }
     }
 
-    public void flussoManutentore() {
+    public void flussoManutentore(SistemaDomotico sistemaDomotico) {
+        this.sistemaDomotico = sistemaDomotico;
         boolean esci = false;
         do {
             int risposta = Interazione.interrogazione("Cosa vuoi fare (qualsiasi altro tasto per uscire) :",
@@ -138,7 +141,7 @@ public class UnitaImmobiliare {
         } else {
             String[] elencoStanze = stanze.keySet().toArray(new String[0]);
             risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze);
-            if(stanze.get(elencoStanze[risposta]).equals("Esterno"))
+            if(elencoStanze[risposta].equals("Esterno"))
                 System.out.println("Non si puo` aggiungere un sensore all'esterno senza un artefatto");
             else if(!stanze.get(elencoStanze[risposta]).aggiungiSensore(creaSensore()))
                 System.out.println("C'e` gia un sensore di questa categoria!");
@@ -166,7 +169,7 @@ public class UnitaImmobiliare {
         } else {
             String[] elencoStanze = stanze.keySet().toArray(new String[0]);
             risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze);
-            if(stanze.get(risposta).equals("Esterno"))
+            if(elencoStanze[risposta].equals("Esterno"))
                 System.out.println("Non si puo` aggiungere un attuatore all'esterno senza un artefatto");
             else if(!stanze.get(elencoStanze[risposta]).aggiungiAttuatore(creaAttuatore()))
                 System.out.println("C'e` gia un attuatore di questa categoria!");
@@ -175,22 +178,22 @@ public class UnitaImmobiliare {
 
     private Sensore creaSensore() {
         String nome = Interazione.domanda("Nome fantasia sensore");
-        String[] nomiCat = new String[SistemaDomotico.categorieSensori.size()];
+        String[] nomiCat = new String[sistemaDomotico.getCategorieSensori().size()];
         for (int i = 0; i < nomiCat.length; i++) {
-            nomiCat[i] = SistemaDomotico.categorieSensori.get(i).getNome();
+            nomiCat[i] = sistemaDomotico.getCategorieSensori().get(i).getNome();
         }
         int cat = Interazione.interrogazione("Scegli la categoria del sensore", nomiCat);
-        return new Sensore((CategoriaSensore) SistemaDomotico.categorieSensori.get(cat), nome);
+        return new Sensore((CategoriaSensore) sistemaDomotico.getCategorieSensori().get(cat), nome);
     }
 
     private Attuatore creaAttuatore() {
         String nome = Interazione.domanda("Nome fantasia attuatore");
-        String[] nomiCat = new String[SistemaDomotico.categorieAttuatori.size()];
-        for (int i = 0; i < SistemaDomotico.categorieAttuatori.size(); i++) {
-            nomiCat[i] = SistemaDomotico.categorieAttuatori.get(i).getNome();
+        String[] nomiCat = new String[sistemaDomotico.getCategorieAttuatori().size()];
+        for (int i = 0; i < sistemaDomotico.getCategorieAttuatori().size(); i++) {
+            nomiCat[i] = sistemaDomotico.getCategorieAttuatori().get(i).getNome();
         }
         int cat = Interazione.interrogazione("Scegli la categoria dell'attuatore", nomiCat);
-        return new Attuatore((CategoriaAttuatore) SistemaDomotico.categorieAttuatori.get(cat), nome);
+        return new Attuatore((CategoriaAttuatore) sistemaDomotico.getCategorieAttuatori().get(cat), nome);
     }
 
     private void proceduraLetturaSensori() {
@@ -215,14 +218,14 @@ public class UnitaImmobiliare {
             }
             tree.append("\n");
             for (Artefatto a : s.getArtefatti()) {
-                tree.append("\tCategorie sensori dell'artefatto " + a.getNome() + " nella stanza\n");
+                tree.append("\t\tCategorie sensori dell'artefatto " + a.getNome() + " nella stanza\n");
                 for (String sensore : s.getCategoriaSensoriPresenti()) {
-                    tree.append("\t\t" + sensore + "\n");
+                    tree.append("\t\t\t" + sensore + "\n");
                 }
                 tree.append("\n");
-                tree.append("\tCategorie attuatori dell'artefatto " + a.getNome() + " nella stanza\n");
+                tree.append("\t\tCategorie attuatori dell'artefatto " + a.getNome() + " nella stanza\n");
                 for (String attuatore : s.getCategoriaAttuatoriPresenti()) {
-                    tree.append("\t\t" + attuatore + "\n");
+                    tree.append("\t\t\t" + attuatore + "\n");
                 }
             }
         }

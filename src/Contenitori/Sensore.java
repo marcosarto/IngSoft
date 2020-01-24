@@ -2,7 +2,9 @@ package Contenitori;
 
 import Categorie.CategoriaSensore;
 
-public class Sensore extends Dispositivo{
+import java.io.Serializable;
+
+public class Sensore extends Dispositivo implements Serializable {
     public Sensore(CategoriaSensore categoria, String nome) {
         super(categoria, nome);
     }
