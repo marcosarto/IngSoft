@@ -3,24 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e0435b15-0de6-41b8-a8c8-e56a255c7bd8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progZan/Categorie/Rilevazione.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Categorie/Rilevazione.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progZan/Contenitori/Stanza.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Contenitori/Stanza.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progZan/UnitaImmobiliare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/UnitaImmobiliare.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progZan/Utility/Interazione.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Utility/Interazione.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Categorie/CategoriaAttuatore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categorie/CategoriaAttuatore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Categorie/CategoriaDispositivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categorie/CategoriaDispositivo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Categorie/CategoriaSensore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categorie/CategoriaSensore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Categorie/ModalitaOperativa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categorie/ModalitaOperativa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Categorie/Rilevazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categorie/Rilevazione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contenitori/Artefatto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Artefatto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contenitori/Attuatore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Attuatore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contenitori/Dispositivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Dispositivo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contenitori/Sensore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Sensore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contenitori/Stanza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Stanza.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SistemaDomotico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SistemaDomotico.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UnitaImmobiliare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UnitaImmobiliare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utility/Interazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utility/Interazione.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

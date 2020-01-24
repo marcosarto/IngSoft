@@ -5,9 +5,10 @@ import Contenitori.Attuatore;
 import Contenitori.Sensore;
 import Contenitori.Stanza;
 import Utility.Interazione;
+
 import java.util.HashMap;
 
-public class UnitaImmobiliare implements java.io.Serializable{
+public class UnitaImmobiliare implements java.io.Serializable {
     private String nomeUnitaImmobiliare, tipoUnitaImmobiliare;
     private HashMap<String, Stanza> stanze = new HashMap<>();
     private HashMap<String, Stanza> artefatti = new HashMap<>();//chiave nome artefatto valore stanza associata
@@ -122,57 +123,111 @@ public class UnitaImmobiliare implements java.io.Serializable{
     }
 
     private void aggiungiSensore() {
+        Sensore sensoreCorrente = creaSensore();
+        if(sensoreCorrente==null)
+            return;
         int risposta = Interazione.interrogazione("Dove vuoi posizionare il sensore?",
                 new String[]{"Artefatto", "Stanza"});
         if (risposta == 0) {
-            StringBuilder st = new StringBuilder();
-            st.append("Scegli il l'artefatto (inserisci il nome) : "+"\n");
-            for (String s : artefatti.keySet()) {
-                st.append(s + "\n");
+            if(artefatti.keySet().size()==0){
+                System.out.println("Non hai artefatti presenti al momento, ritorno al menu");
+                return;
             }
-            String artefattoScelto = Interazione.domanda(st.toString());
-            if(!artefatti.containsKey(artefattoScelto))
-                System.out.println("Nome non corretto o non esistenete");
-            else{
-                if(!artefatti.get(artefattoScelto).aggiungiSensore(creaSensore()))
-                    System.out.println("C'e` gia un sensore di questa categoria!");
-            }
+            boolean nuovoArtefatto = false;
+            do {
+                StringBuilder st = new StringBuilder();
+                st.append("Scegli il l'artefatto (inserisci il nome) : " + "\n");
+                for (String s : artefatti.keySet()) {
+                    st.append(s + "\n");
+                }
+                String artefattoScelto = Interazione.domanda(st.toString());
+                if (!artefatti.containsKey(artefattoScelto))
+                    System.out.println("Nome non corretto o non esistenete");
+                else {
+                    if (!artefatti.get(artefattoScelto).aggiungiSensore(sensoreCorrente))
+                        System.out.println("C'e` gia un sensore di questa categoria!");
+                }
+                if (Interazione.domanda("Vuoi collegarlo ad un altro artefatto? (y/any key)").equals("y"))
+                    nuovoArtefatto = true;
+                else
+                    nuovoArtefatto = false;
+
+            } while (nuovoArtefatto);
 
         } else {
-            String[] elencoStanze = stanze.keySet().toArray(new String[0]);
-            risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze);
-            if(elencoStanze[risposta].equals("Esterno"))
-                System.out.println("Non si puo` aggiungere un sensore all'esterno senza un artefatto");
-            else if(!stanze.get(elencoStanze[risposta]).aggiungiSensore(creaSensore()))
-                System.out.println("C'e` gia un sensore di questa categoria!");
+            if(stanze.keySet().size()==0){
+                System.out.println("Non hai stanze presenti al momento, ritorno al menu");
+                return;
+            }
+            boolean nuovaStanza = false;
+            do {
+                String[] elencoStanze = stanze.keySet().toArray(new String[0]);
+                risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze);
+                if (elencoStanze[risposta].equals("Esterno"))
+                    System.out.println("Non si puo` aggiungere un sensore all'esterno senza un artefatto");
+                else if (!stanze.get(elencoStanze[risposta]).aggiungiSensore(sensoreCorrente))
+                    System.out.println("C'e` gia un sensore di questa categoria!");
+
+                if (Interazione.domanda("Vuoi collegarlo ad un altra stanza? (y/any key)").equals("y"))
+                    nuovaStanza = true;
+                else
+                    nuovaStanza = false;
+            } while (nuovaStanza);
         }
 
     }
 
     private void aggingiAttuatore() {
+        Attuatore attuatoreCorrente = creaAttuatore();
+        if(attuatoreCorrente == null)
+            return;
         int risposta = Interazione.interrogazione("Dove vuoi posizionare l'attuatore?",
                 new String[]{"Artefatto", "Stanza"});
         if (risposta == 0) {
-            StringBuilder st = new StringBuilder();
-            st.append("Scegli il l'artefatto (inserisci il nome) : "+"\n");
-            for (String s : artefatti.keySet()) {
-                st.append(s + "\n");
+            if(artefatti.keySet().size()==0){
+                System.out.println("Non hai artefatti presenti al momento, ritorno al menu");
+                return;
             }
-            String artefattoScelto = Interazione.domanda(st.toString());
-            if(!artefatti.containsKey(artefattoScelto))
-                System.out.println("Nome non corretto o non esistenete");
-            else{
-                if(!artefatti.get(artefattoScelto).aggiungiAttuatore(creaAttuatore()))
-                    System.out.println("C'e` gia un'attuatore di questa categoria!");
-            }
+            boolean nuovoArtefatto = false;
+            do {
+                StringBuilder st = new StringBuilder();
+                st.append("Scegli il l'artefatto (inserisci il nome) : " + "\n");
+                for (String s : artefatti.keySet()) {
+                    st.append(s + "\n");
+                }
+                String artefattoScelto = Interazione.domanda(st.toString());
+                if (!artefatti.containsKey(artefattoScelto))
+                    System.out.println("Nome non corretto o non esistenete");
+                else {
+                    if (!artefatti.get(artefattoScelto).aggiungiAttuatore(attuatoreCorrente))
+                        System.out.println("C'e` gia un'attuatore di questa categoria!");
+                }
+                if (Interazione.domanda("Vuoi collegarlo ad un altro artefatto? (y/any key)").equals("y"))
+                    nuovoArtefatto = true;
+                else
+                    nuovoArtefatto = false;
+
+            } while (nuovoArtefatto);
 
         } else {
-            String[] elencoStanze = stanze.keySet().toArray(new String[0]);
-            risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze);
-            if(elencoStanze[risposta].equals("Esterno"))
-                System.out.println("Non si puo` aggiungere un attuatore all'esterno senza un artefatto");
-            else if(!stanze.get(elencoStanze[risposta]).aggiungiAttuatore(creaAttuatore()))
-                System.out.println("C'e` gia un attuatore di questa categoria!");
+            if(stanze.keySet().size()==0){
+                System.out.println("Non hai stanze presenti al momento, ritorno al menu");
+                return;
+            }
+            boolean nuovaStanza = false;
+            do {
+                String[] elencoStanze = stanze.keySet().toArray(new String[0]);
+                risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze);
+                if (elencoStanze[risposta].equals("Esterno"))
+                    System.out.println("Non si puo` aggiungere un attuatore all'esterno senza un artefatto");
+                else if (!stanze.get(elencoStanze[risposta]).aggiungiAttuatore(attuatoreCorrente))
+                    System.out.println("C'e` gia un attuatore di questa categoria!");
+
+                if (Interazione.domanda("Vuoi collegarlo ad un altra stanza? (y/any key)").equals("y"))
+                    nuovaStanza = true;
+                else
+                    nuovaStanza = false;
+            } while (nuovaStanza);
         }
     }
 
@@ -181,6 +236,10 @@ public class UnitaImmobiliare implements java.io.Serializable{
         String[] nomiCat = new String[sistemaDomotico.getCategorieSensori().size()];
         for (int i = 0; i < nomiCat.length; i++) {
             nomiCat[i] = sistemaDomotico.getCategorieSensori().get(i).getNome();
+        }
+        if(nomiCat.length==0){
+            System.out.println("Al momento non hai categorie sensori tra cui scegliere, ritorno al menu");
+            return null;
         }
         int cat = Interazione.interrogazione("Scegli la categoria del sensore", nomiCat);
         return new Sensore((CategoriaSensore) sistemaDomotico.getCategorieSensori().get(cat), nome);
@@ -192,7 +251,12 @@ public class UnitaImmobiliare implements java.io.Serializable{
         for (int i = 0; i < sistemaDomotico.getCategorieAttuatori().size(); i++) {
             nomiCat[i] = sistemaDomotico.getCategorieAttuatori().get(i).getNome();
         }
+        if(nomiCat.length==0){
+            System.out.println("Al momento non hai categorie attuatori tra cui scegliere, ritorno al menu");
+            return null;
+        }
         int cat = Interazione.interrogazione("Scegli la categoria dell'attuatore", nomiCat);
+
         return new Attuatore((CategoriaAttuatore) sistemaDomotico.getCategorieAttuatori().get(cat), nome);
     }
 
