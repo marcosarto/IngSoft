@@ -44,6 +44,7 @@ public class MainApp {
             file.close();
 
             System.out.println("Stato salvato");
+            //nuovaVersione
 
         }
 
