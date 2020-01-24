@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class Interazione {
     private static Scanner in = new Scanner(System.in);
-    private static final String DELIMITATORE = "---------------------------------------------------------------------------------------";
+    public static final String DELIMITATORE = "---------------------------------------------------------------------------------------";
+    public static final String NEW_LINE = "";
 
 
     public static int interrogazione(String domanda,String[] entrate){
@@ -16,7 +17,11 @@ public class Interazione {
         do {
             System.out.print(domanda+" ");
             try {
-                menuItem = Integer.valueOf(in.nextLine());
+                String risposta;
+                do {
+                    risposta = in.nextLine();
+                }while (risposta.equals(NEW_LINE));
+                menuItem = Integer.parseInt(risposta);
             }catch(Exception e){
                 return -1;
             }
@@ -30,7 +35,10 @@ public class Interazione {
     public static String domanda(String domanda){
         System.out.println(DELIMITATORE);
         System.out.println(domanda+" ");
-        String risposta = in.nextLine();
+        String risposta;
+        do {
+            risposta = in.nextLine();
+        }while (risposta.equals(NEW_LINE));
         System.out.println(DELIMITATORE);
         return risposta;
     }

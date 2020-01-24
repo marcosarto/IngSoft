@@ -20,7 +20,7 @@ public abstract class Contenitore implements Serializable {
     public boolean aggiungiSensore(Sensore s){
         if(categoriaSensoriPresenti.contains(s.getCategoria().getNome()))
             return false;
-        sensori.put(s.getNome()+"_"+s.getCategoria(),s);
+        sensori.put(s.getNome()+"_"+s.getCategoria().getNome(),s);
         categoriaSensoriPresenti.add(s.categoria.getNome());
         return true;
     }
@@ -28,7 +28,7 @@ public abstract class Contenitore implements Serializable {
     public boolean aggiungiAttuatore(Attuatore a){
         if(categoriaAttuatoriPresenti.contains(a.getCategoria().getNome()))
             return false;
-        attuatori.put(a.getNome()+"_"+a.getCategoria(),a);
+        attuatori.put(a.getNome()+"_"+a.getCategoria().getNome(),a);
         categoriaAttuatoriPresenti.add(a.getCategoria().getNome());
         return true;
     }
@@ -47,15 +47,16 @@ public abstract class Contenitore implements Serializable {
 
     public String getSensori(){
         StringBuilder st = new StringBuilder();
-        for (String s :
-                sensori.keySet()) {
-            st.append(st + "\n");
+        for (String s : sensori.keySet()) {
+            st.append(s + "\n");
         }
         return st.toString();
     }
 
     public String ritornaValoreSensore(String key){
-        return sensori.get(key).getValore();
+        if(sensori.containsKey(key))
+            return sensori.get(key).getValore();
+        else return "";
     }
 
 }

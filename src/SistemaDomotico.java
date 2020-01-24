@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class SistemaDomotico implements Serializable {
 
-    ArrayList<UnitaImmobiliare> unitaImmobiliari = new ArrayList();
-    ArrayList<CategoriaDispositivo> categorieSensori = new ArrayList();
-    ArrayList<CategoriaDispositivo> categorieAttuatori = new ArrayList();
+    private ArrayList<UnitaImmobiliare> unitaImmobiliari = new ArrayList();
+    private ArrayList<CategoriaDispositivo> categorieSensori = new ArrayList();
+    private ArrayList<CategoriaDispositivo> categorieAttuatori = new ArrayList();
 
     public SistemaDomotico() {
         init();
