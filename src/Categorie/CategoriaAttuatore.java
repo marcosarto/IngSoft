@@ -1,15 +1,16 @@
 package Categorie;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class CategoriaAttuatore extends CategoriaDispositivo implements Serializable {
-    private ModalitaOperativa modalita;
+    private HashMap<String,ModalitaOperativa> modalita = new HashMap<>();
 
     public CategoriaAttuatore(String nome) {
         super(nome);
     }
 
-    public void setModalita(ModalitaOperativa modalita) {
-        this.modalita = modalita;
+    public void addModalita(ModalitaOperativa modalita) {
+        this.modalita.put(modalita.getNome(),modalita);
     }
 }

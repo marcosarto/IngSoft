@@ -1,20 +1,24 @@
 package Categorie;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CategoriaSensore extends CategoriaDispositivo implements Serializable {
-    private ArrayList<Rilevazione> informazioni = new ArrayList<>();
+    private HashMap<String,Rilevazione> informazioni = new HashMap<>();
 
     public CategoriaSensore(String nome) {
         super(nome);
     }
 
     public void setInformazioni(Rilevazione informazioni) {
-        this.informazioni.add(informazioni);
+        this.informazioni.put(informazioni.getNome(),informazioni);
     }
 
     public String getValore(){
-        return informazioni.get(0).getValore();
+        StringBuilder str = new StringBuilder();
+        for(Rilevazione r : informazioni.values()) {
+            str.append("Rilevazione " + r.getNome() +" con valore : "+r.getValore()+"\n");
+        }
+        return str.toString();
     }
 }

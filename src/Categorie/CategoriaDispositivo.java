@@ -11,9 +11,10 @@ public abstract class CategoriaDispositivo implements Serializable {
         stato = true; //prima versione sempre accesi
     }
 
-    public String getPrimoCampo(){
-        // Primo elemento della descizione e` unita di misura per sensore e default modalita operativa
-        return descrizione.split(",")[0];
+    public String getUnitaMisura(int pos){
+        if(pos>=descrizione.split(",").length)
+            System.out.println("Non e` stata inserita nessuna unita` di misura di default");
+        return descrizione.split(",")[pos];
     }
 
     public String getNome() {

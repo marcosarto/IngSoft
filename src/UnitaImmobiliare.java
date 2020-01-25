@@ -280,7 +280,7 @@ public class UnitaImmobiliare implements java.io.Serializable {
             for (Stanza s : stanze.values()) {
                 String val = s.ritornaValoreSensore(risposta);
                 if (!val.isEmpty()) {
-                    System.out.println("Il valore del sensore e` : " + val);
+                    System.out.println(val);
                     val = Interazione.domanda("Vuoi controllare un altro sensore? (y/any key)");
                     if(val.equals("y"))
                         continue;
