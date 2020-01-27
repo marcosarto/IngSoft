@@ -18,7 +18,7 @@ public class SistemaDomotico implements Serializable {
         String uscita = null;
         do {
             int risposta = Interazione.interrogazione("Seleziona la modalita` operativa",
-                    new String[]{"Utente", "Manutentore"});
+                    new String[]{"Utente", "Manutentore"},true);
 
             switch (risposta) {
                 case 0:
@@ -49,7 +49,7 @@ public class SistemaDomotico implements Serializable {
         }
 
         int risposta = Interazione.interrogazione("Seleziona l'unita' immobiliare che vuoi ispezionare :",
-                entrateUnitaImmobiliare);
+                entrateUnitaImmobiliare,true);
         return risposta;
     }
 
@@ -75,7 +75,7 @@ public class SistemaDomotico implements Serializable {
             Rilevazione rilevazione = new Rilevazione();
             rilevazione.setNome(risposta);
             int scelta = Interazione.interrogazione("Misura un valore numerico o un dominio discreto? ",
-                    new String[]{"Valore numerico", "Dominio discreto"});
+                    new String[]{"Valore numerico", "Dominio discreto"},false);
             if (scelta == 0) {
                 try {
                     risposta = Interazione.domanda("Minimo rilevabile dal sensore : ");
@@ -124,7 +124,7 @@ public class SistemaDomotico implements Serializable {
             ModalitaOperativa modalitaOperativa = new ModalitaOperativa();
             modalitaOperativa.setNome(risposta);
             int scelta = Interazione.interrogazione("Modalita` a stati o parametrica?",
-                    new String[]{"A stati", "Parametrica"});
+                    new String[]{"A stati", "Parametrica"},false);
             if (scelta == 0) {
                 do {
                     risposta = Interazione.domanda("Inserisci stati possibili");
@@ -163,6 +163,8 @@ public class SistemaDomotico implements Serializable {
             System.out.println("Non e` ancora stata creata nessuna unita` immobiliare, contatta il manutentore");
         } else {
             int numeroUnitaImmobiliare = visualizzaElencoUnitaImmobiliari();
+            if(numeroUnitaImmobiliare==-1)
+                return;
             unitaImmobiliari.get(numeroUnitaImmobiliare).flussoFruitore(this);
         }
     }
@@ -174,7 +176,7 @@ public class SistemaDomotico implements Serializable {
                     new String[]{"Aggiungi categorie sensori",
                             "Aggiungi categoria attuatori",
                             "Creare e descrivere l'unita` immobiliare",
-                            "Selezionare un'unita` immobiliare per lavorarci"});
+                            "Selezionare un'unita` immobiliare per lavorarci"},true);
             switch (risposta) {
                 case 0:
                     aggiungiCategorieSensori();

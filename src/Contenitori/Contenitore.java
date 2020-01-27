@@ -53,10 +53,25 @@ public abstract class Contenitore implements Serializable {
         return st.toString();
     }
 
+    public String getAttuatori(){
+        StringBuilder st = new StringBuilder();
+        for (String s : attuatori.keySet()) {
+            st.append(s + "\n");
+        }
+        return st.toString();
+    }
+
     public String ritornaValoreSensore(String key){
         if(sensori.containsKey(key))
             return sensori.get(key).getValore();
         else return "";
+    }
+
+    public Attuatore ritornaRiferimentoAttuatore(String nome){
+        if(attuatori.containsKey(nome))
+            return attuatori.get(nome);
+        else
+            return null;
     }
 
 }

@@ -13,4 +13,8 @@ public class CategoriaAttuatore extends CategoriaDispositivo implements Serializ
     public void addModalita(ModalitaOperativa modalita) {
         this.modalita.put(modalita.getNome(),modalita);
     }
+
+    public HashMap<String, ModalitaOperativa> getModalitaOperativa(){
+        return modalita;
+    }
 }

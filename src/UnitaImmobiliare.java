@@ -1,5 +1,7 @@
 import Categorie.CategoriaAttuatore;
 import Categorie.CategoriaSensore;
+import Categorie.ModalitaOperativa;
+import Categorie.Parametro;
 import Contenitori.Artefatto;
 import Contenitori.Attuatore;
 import Contenitori.Sensore;
@@ -24,7 +26,7 @@ public class UnitaImmobiliare implements java.io.Serializable {
         int risposta = Interazione.interrogazione
                 ("Bisogna aggiungere almeno una stanza o un artefatto," +
                                 " (nel seguito se ne potranno aggiungere altri)",
-                        new String[]{"Artefatto", "Stanza"});
+                        new String[]{"Artefatto", "Stanza"}, false);
 
         switch (risposta) {
             case 0:
@@ -63,7 +65,7 @@ public class UnitaImmobiliare implements java.io.Serializable {
             String[] elencoStanze = stanze.keySet().toArray(new String[0]);
 
             int stanzaDaAbbinare = Interazione.interrogazione
-                    ("In quale stanza vuoi aggiungere l'artefatto ", elencoStanze);
+                    ("In quale stanza vuoi aggiungere l'artefatto ", elencoStanze, false);
 
             if (!stanze.get(elencoStanze[stanzaDaAbbinare]).aggiungiArtefatto(artefatto))
                 System.out.println("Artefatto gia esistente in questa stanza");
@@ -79,13 +81,19 @@ public class UnitaImmobiliare implements java.io.Serializable {
     public void flussoFruitore(SistemaDomotico sistemaDomotico) {
         this.sistemaDomotico = sistemaDomotico;
         int risposta = Interazione.interrogazione("Cosa vuoi fare?",
-                new String[]{"Visualizza piantina unita' immobiliare", "Visualizza valori di sensori specifici"});
+                new String[]{"Visualizza piantina unita' immobiliare",
+                        "Visualizza valori di sensori specifici",
+                        "Agisci sugli attuatori",
+                }, true);
         switch (risposta) {
             case 0:
                 stampaAlberoUnitaImmobiliare();
                 break;
             case 1:
                 proceduraLetturaSensori();
+                break;
+            case 2:
+                proceduraAttuatori();
                 break;
         }
     }
@@ -99,7 +107,7 @@ public class UnitaImmobiliare implements java.io.Serializable {
                             "Aggiungi artefatti",
                             "Aggiungi sensore",
                             "Aggiungi attuatore",
-                            "Visualizza albero associazioni"});
+                            "Visualizza albero associazioni"}, true);
             switch (risposta) {
                 case 0:
                     aggiungiStanza();
@@ -125,12 +133,12 @@ public class UnitaImmobiliare implements java.io.Serializable {
 
     private void aggiungiSensore() {
         Sensore sensoreCorrente = creaSensore();
-        if(sensoreCorrente==null)
+        if (sensoreCorrente == null)
             return;
         int risposta = Interazione.interrogazione("Dove vuoi posizionare il sensore?",
-                new String[]{"Artefatto", "Stanza"});
+                new String[]{"Artefatto", "Stanza"}, false);
         if (risposta == 0) {
-            if(artefatti.keySet().size()==0){
+            if (artefatti.keySet().size() == 0) {
                 System.out.println("Non hai artefatti presenti al momento, ritorno al menu");
                 return;
             }
@@ -145,10 +153,10 @@ public class UnitaImmobiliare implements java.io.Serializable {
                 if (!artefatti.containsKey(artefattoScelto))
                     System.out.println("Nome non corretto o non esistenete");
                 else {
-                    if (!artefatti.get(artefattoScelto).aggiungiSensoreSuArtefatto(artefattoScelto,sensoreCorrente))
+                    if (!artefatti.get(artefattoScelto).aggiungiSensoreSuArtefatto(artefattoScelto, sensoreCorrente))
                         System.out.println("C'e` gia un sensore di questa categoria!");
                     else
-                        almenoUnSensore=true;
+                        almenoUnSensore = true;
                 }
                 if (Interazione.domanda("Vuoi collegarlo ad un altro artefatto? (y/any key)").equals("y"))
                     nuovoArtefatto = true;
@@ -158,20 +166,20 @@ public class UnitaImmobiliare implements java.io.Serializable {
             } while (nuovoArtefatto);
 
         } else {
-            if(stanze.keySet().size()==0){
+            if (stanze.keySet().size() == 0) {
                 System.out.println("Non hai stanze presenti al momento, ritorno al menu");
                 return;
             }
             boolean nuovaStanza = false;
             do {
                 String[] elencoStanze = stanze.keySet().toArray(new String[0]);
-                risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze);
+                risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze, false);
                 if (elencoStanze[risposta].equals("Esterno"))
                     System.out.println("Non si puo` aggiungere un sensore all'esterno senza un artefatto");
                 else if (!stanze.get(elencoStanze[risposta]).aggiungiSensore(sensoreCorrente))
                     System.out.println("C'e` gia un sensore di questa categoria!");
                 else
-                    almenoUnSensore=true;
+                    almenoUnSensore = true;
 
                 if (Interazione.domanda("Vuoi collegarlo ad un altra stanza? (y/any key)").equals("y"))
                     nuovaStanza = true;
@@ -184,12 +192,12 @@ public class UnitaImmobiliare implements java.io.Serializable {
 
     private void aggingiAttuatore() {
         Attuatore attuatoreCorrente = creaAttuatore();
-        if(attuatoreCorrente == null)
+        if (attuatoreCorrente == null)
             return;
         int risposta = Interazione.interrogazione("Dove vuoi posizionare l'attuatore?",
-                new String[]{"Artefatto", "Stanza"});
+                new String[]{"Artefatto", "Stanza"}, false);
         if (risposta == 0) {
-            if(artefatti.keySet().size()==0){
+            if (artefatti.keySet().size() == 0) {
                 System.out.println("Non hai artefatti presenti al momento, ritorno al menu");
                 return;
             }
@@ -204,7 +212,7 @@ public class UnitaImmobiliare implements java.io.Serializable {
                 if (!artefatti.containsKey(artefattoScelto))
                     System.out.println("Nome non corretto o non esistenete");
                 else {
-                    if (!artefatti.get(artefattoScelto).aggiungiAttuatoreSuArtefatto(artefattoScelto,attuatoreCorrente))
+                    if (!artefatti.get(artefattoScelto).aggiungiAttuatoreSuArtefatto(artefattoScelto, attuatoreCorrente))
                         System.out.println("C'e` gia un'attuatore di questa categoria!");
                 }
                 if (Interazione.domanda("Vuoi collegarlo ad un altro artefatto? (y/any key)").equals("y"))
@@ -215,14 +223,14 @@ public class UnitaImmobiliare implements java.io.Serializable {
             } while (nuovoArtefatto);
 
         } else {
-            if(stanze.keySet().size()==0){
+            if (stanze.keySet().size() == 0) {
                 System.out.println("Non hai stanze presenti al momento, ritorno al menu");
                 return;
             }
             boolean nuovaStanza = false;
             do {
                 String[] elencoStanze = stanze.keySet().toArray(new String[0]);
-                risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze);
+                risposta = Interazione.interrogazione("In quale stanza? ", elencoStanze, false);
                 if (elencoStanze[risposta].equals("Esterno"))
                     System.out.println("Non si puo` aggiungere un attuatore all'esterno senza un artefatto");
                 else if (!stanze.get(elencoStanze[risposta]).aggiungiAttuatore(attuatoreCorrente))
@@ -242,11 +250,11 @@ public class UnitaImmobiliare implements java.io.Serializable {
         for (int i = 0; i < nomiCat.length; i++) {
             nomiCat[i] = sistemaDomotico.getCategorieSensori().get(i).getNome();
         }
-        if(nomiCat.length==0){
+        if (nomiCat.length == 0) {
             System.out.println("Al momento non hai categorie sensori tra cui scegliere, ritorno al menu");
             return null;
         }
-        int cat = Interazione.interrogazione("Scegli la categoria del sensore", nomiCat);
+        int cat = Interazione.interrogazione("Scegli la categoria del sensore", nomiCat, false);
         return new Sensore((CategoriaSensore) sistemaDomotico.getCategorieSensori().get(cat), nome);
     }
 
@@ -256,11 +264,11 @@ public class UnitaImmobiliare implements java.io.Serializable {
         for (int i = 0; i < sistemaDomotico.getCategorieAttuatori().size(); i++) {
             nomiCat[i] = sistemaDomotico.getCategorieAttuatori().get(i).getNome();
         }
-        if(nomiCat.length==0){
+        if (nomiCat.length == 0) {
             System.out.println("Al momento non hai categorie attuatori tra cui scegliere, ritorno al menu");
             return null;
         }
-        int cat = Interazione.interrogazione("Scegli la categoria dell'attuatore", nomiCat);
+        int cat = Interazione.interrogazione("Scegli la categoria dell'attuatore", nomiCat, false);
 
         return new Attuatore((CategoriaAttuatore) sistemaDomotico.getCategorieAttuatori().get(cat), nome);
     }
@@ -282,7 +290,7 @@ public class UnitaImmobiliare implements java.io.Serializable {
                 if (!val.isEmpty()) {
                     System.out.println(val);
                     val = Interazione.domanda("Vuoi controllare un altro sensore? (y/any key)");
-                    if(val.equals("y"))
+                    if (val.equals("y"))
                         continue;
                     else
                         return;
@@ -292,14 +300,84 @@ public class UnitaImmobiliare implements java.io.Serializable {
                     if (!valA.isEmpty()) {
                         System.out.println("Il valore del sensore e` : " + valA);
                         valA = Interazione.domanda("Vuoi controllare un altro sensore? (y/any key)");
-                        if(valA.equals("y"))
+                        if (valA.equals("y"))
                             continue;
                         else
                             return;
                     }
                 }
             }
-        }while(true);
+        } while (true);
+    }
+
+    private void proceduraAttuatori() {
+        do {
+            for (Stanza s : stanze.values()) {
+                System.out.println("Attuatori nella stanza " + s.getNome());
+                System.out.println(s.getAttuatori());
+                System.out.println("Attuatori sugli artifatti della stanza " + s.getNome());
+                for (Artefatto a : s.getArtefatti()) {
+                    System.out.println(a.getAttuatori());
+                }
+                System.out.println(Interazione.DELIMITATORE);
+            }
+            String risposta = Interazione.domanda("Inserisci nome attuatore che vuoi comandare : ");
+            Attuatore val = null;
+            for (Stanza s : stanze.values()) {
+                if (s.ritornaRiferimentoAttuatore(risposta) != null) {
+                    val = s.ritornaRiferimentoAttuatore(risposta);
+                }
+                for (Artefatto a : s.getArtefatti()) {
+                    if (a.ritornaRiferimentoAttuatore(risposta) != null) {
+                        val = a.ritornaRiferimentoAttuatore(risposta);
+                    }
+                }
+            }
+            if (val != null) {
+                CategoriaAttuatore cat = (CategoriaAttuatore) val.getCategoria();
+                System.out.println("Attuatore di categoria " + cat.getNome());
+                int risp = Interazione.interrogazione("Quale modalita operativa vuoi comandare : ",
+                        cat.getModalitaOperativa().keySet().toArray(new String[0]), false);
+                String modS = cat.getModalitaOperativa().keySet().toArray(new String[0])[risp];
+                ModalitaOperativa mod = cat.getModalitaOperativa().get(modS);
+                if (mod.isAStati()) {
+                    if (val.getStatoCorrente(modS) == null)
+                        System.out.println("Al momento questo attuatore non ha uno stato settato");
+                    else
+                        System.out.println("Stato corrente " + val.getStatoCorrente(modS));
+                    risp = Interazione.interrogazione("Quale stato vuoi applicare? ",
+                            mod.getStati().toArray(new String[0]), false);
+                    String nuovoStato = mod.getStati().toArray(new String[0])[risp];
+                    val.setStatoCorrente(modS, nuovoStato);
+                } else {
+                    for (Parametro p : mod.getParametri().values()) {
+                        System.out.println("Il parametro " + p.getNome() + " ha un valore desiderato di " + p.getValoreDesiderato());
+                    }
+                    String parametroDaModificare = Interazione.domanda("Quale parametro vuoi cambiare? : ");
+                    if (!mod.getParametri().containsKey(parametroDaModificare))
+                        System.out.println("Non esiste un parametro con quel nome");
+                    boolean fineTransizione = false;
+                    do {
+                        try {
+                            String valoreDesiderato = Interazione.domanda("Che valore vuoi impostare? : ");
+                            mod.getParametri().get(parametroDaModificare).setValoreDesiderato(Integer.parseInt(valoreDesiderato));
+                            fineTransizione = true;
+                        } catch (Exception e) {
+                            System.out.println("Devi inserire un valore numerico");
+                        }
+                    } while (!fineTransizione);
+                }
+            } else {
+                System.out.println("Attuatore non trovato ");
+            }
+            String valA = Interazione.domanda("Vuoi controllare un altro attuatore? (y/any key)");
+            if (valA.equals("y"))
+                continue;
+            else
+                return;
+
+
+        } while (true);
     }
 
     private void stampaAlberoUnitaImmobiliare() {

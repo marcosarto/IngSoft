@@ -8,6 +8,7 @@ public class ModalitaOperativa implements Serializable {
     private String nome;
     private ArrayList<String> stati = new ArrayList<>();
     private HashMap<String,Parametro> parametri = new HashMap<>();
+
     private boolean aStati;
 
     public void setNome(String nome) {
@@ -23,8 +24,26 @@ public class ModalitaOperativa implements Serializable {
         aStati = true;
     }
 
-    public void addParametro(String nome ,Parametro p){
+    public boolean isAStati(){
+        return aStati;
+    }
+
+    public ArrayList<String> getStati(){
+        return stati;
+    }
+
+    public HashMap<String, Parametro> getParametri() {
+        return parametri;
+    }
+
+    public int getLenghtParametri(){
+        return parametri.values().size();
+    }
+
+    public void addParametro(String nome , Parametro p){
         parametri.put(nome,p);
         aStati=false;
     }
+
+
 }

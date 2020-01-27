@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0435b15-0de6-41b8-a8c8-e56a255c7bd8" name="Default Changelist" comment="" />
+    <list default="true" id="e0435b15-0de6-41b8-a8c8-e56a255c7bd8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.ser" beforeDir="false" afterPath="$PROJECT_DIR$/file.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/Categorie/Parametro.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Categorie/Parametro.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/Contenitori/Contenitore.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Contenitori/Contenitore.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/SistemaDomotico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/SistemaDomotico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/UnitaImmobiliare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/UnitaImmobiliare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/Utility/Interazione.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Utility/Interazione.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Categorie/CategoriaAttuatore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categorie/CategoriaAttuatore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Categorie/ModalitaOperativa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categorie/ModalitaOperativa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Categorie/Parametro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categorie/Parametro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Contenitori/Attuatore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Attuatore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SistemaDomotico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SistemaDomotico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UnitaImmobiliare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UnitaImmobiliare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utility/Interazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utility/Interazione.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +54,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -123,5 +139,16 @@
     <state x="449" y="188" width="1022" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" />
     <state x="616" y="380" key="com.intellij.ide.util.TipDialog" />
     <state x="616" y="380" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/UnitaImmobiliare.java</url>
+          <line>323</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
