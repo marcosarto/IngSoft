@@ -78,23 +78,26 @@ public class UnitaImmobiliare implements java.io.Serializable {
 
     public void flussoFruitore(SistemaDomotico sistemaDomotico) {
         this.sistemaDomotico = sistemaDomotico;
-        int risposta = Interazione.interrogazione("Cosa vuoi fare?",
-                new String[]{"Visualizza piantina unita' immobiliare", "Visualizza valori di sensori specifici"});
-        switch (risposta) {
-            case 0:
-                stampaAlberoUnitaImmobiliare();
-                break;
-            case 1:
-                proceduraLetturaSensori();
-                break;
-        }
+        int risposta;
+        do {
+            risposta = Interazione.interrogazione("Cosa vuoi fare?(0 per uscire)",
+                    new String[]{"Visualizza piantina unita' immobiliare", "Visualizza valori di sensori specifici"});
+            switch (risposta) {
+                case 0:
+                    stampaAlberoUnitaImmobiliare();
+                    break;
+                case 1:
+                    proceduraLetturaSensori();
+                    break;
+            }
+        }while(risposta!=-1);
     }
 
     public void flussoManutentore(SistemaDomotico sistemaDomotico) {
         this.sistemaDomotico = sistemaDomotico;
-        boolean esci = false;
+        int risposta;
         do {
-            int risposta = Interazione.interrogazione("Cosa vuoi fare (qualsiasi altro tasto per uscire) :",
+            risposta = Interazione.interrogazione("Cosa vuoi fare (0 per uscire) :",
                     new String[]{"Aggiungi stanze",
                             "Aggiungi artefatti",
                             "Aggiungi sensore",
@@ -116,11 +119,8 @@ public class UnitaImmobiliare implements java.io.Serializable {
                 case 4:
                     stampaAlberoUnitaImmobiliare();
                     break;
-                default:
-                    esci = true;
-                    break;
             }
-        } while (!esci);
+        } while (risposta!=-1);
     }
 
     private void aggiungiSensore() {
