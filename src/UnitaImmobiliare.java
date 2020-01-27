@@ -79,23 +79,26 @@ public class UnitaImmobiliare implements java.io.Serializable {
     }
 
     public void flussoFruitore(SistemaDomotico sistemaDomotico) {
-        this.sistemaDomotico = sistemaDomotico;
-        int risposta = Interazione.interrogazione("Cosa vuoi fare?",
-                new String[]{"Visualizza piantina unita' immobiliare",
-                        "Visualizza valori di sensori specifici",
-                        "Agisci sugli attuatori",
-                }, true);
-        switch (risposta) {
-            case 0:
-                stampaAlberoUnitaImmobiliare();
-                break;
-            case 1:
-                proceduraLetturaSensori();
-                break;
-            case 2:
-                proceduraAttuatori();
-                break;
-        }
+        int risposta;
+        do {
+            this.sistemaDomotico = sistemaDomotico;
+            risposta = Interazione.interrogazione("Cosa vuoi fare?",
+                    new String[]{"Visualizza piantina unita' immobiliare",
+                            "Visualizza valori di sensori specifici",
+                            "Agisci sugli attuatori",
+                    }, true);
+            switch (risposta) {
+                case 0:
+                    stampaAlberoUnitaImmobiliare();
+                    break;
+                case 1:
+                    proceduraLetturaSensori();
+                    break;
+                case 2:
+                    proceduraAttuatori();
+                    break;
+            }
+        }while (risposta!=-1);
     }
 
     public void flussoManutentore(SistemaDomotico sistemaDomotico) {
