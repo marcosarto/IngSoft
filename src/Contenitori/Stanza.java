@@ -30,13 +30,5 @@ public class Stanza extends Contenitore implements Serializable {
         return artefatti.values();
     }
 
-//    public String getSensori(){
-//        StringBuilder st = new StringBuilder();
-//        st.append(super.getSensori());
-//        for (Artefatto a : artefatti.values()) {
-//            st.append(a.getSensori());
-//        }
-//        return st.toString();
-//    }
 
 }

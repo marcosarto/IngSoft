@@ -21,4 +21,11 @@ public class CategoriaSensore extends CategoriaDispositivo implements Serializab
         }
         return str.toString();
     }
+
+    public Rilevazione getRilevazione(String nome){
+        if(informazioni.containsKey(nome))
+            return informazioni.get(nome);
+        else
+            return null;
+    }
 }

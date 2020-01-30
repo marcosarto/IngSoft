@@ -26,6 +26,10 @@ public class Rilevazione implements Serializable {
         this.massimo = massimo;
     }
 
+    public boolean isMassimoMinimo() {
+        return massimoMinimo;
+    }
+
     public void aggiungiStato(String stato){
         stati.add(stato);
         massimoMinimo = false;
@@ -34,6 +38,13 @@ public class Rilevazione implements Serializable {
     public String getValore() {
         if(massimoMinimo)
             return generaValore()+unitaDiMisura;
+        else
+            return generaStato();
+    }
+
+    public String getValoreSenzaUnitaMisura(){
+        if(massimoMinimo)
+            return ""+generaValore();
         else
             return generaStato();
     }

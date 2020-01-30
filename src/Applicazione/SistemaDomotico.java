@@ -1,3 +1,6 @@
+package Applicazione;
+
+import Applicazione.UnitaImmobiliare;
 import Categorie.*;
 import Utility.Interazione;
 

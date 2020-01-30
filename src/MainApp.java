@@ -1,7 +1,11 @@
+import Applicazione.SistemaDomotico;
+import DipendenteDalTempo.Regola;
+
 import java.io.*;
 
 public class MainApp {
     public static void main(String[] args) {
+
         SistemaDomotico presenteOggetto;
         String filename = "file.ser";
         try
@@ -49,7 +53,7 @@ public class MainApp {
 
         catch(IOException ex)
         {
-            System.out.println("IOException (forse non hai i permessi per scrivere il file)");
+            ex.printStackTrace();
         }
     }
 }

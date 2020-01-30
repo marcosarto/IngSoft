@@ -3,7 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="e0435b15-0de6-41b8-a8c8-e56a255c7bd8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UnitaImmobiliare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UnitaImmobiliare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.ser" beforeDir="false" afterPath="$PROJECT_DIR$/file.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/MainApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/SistemaDomotico.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/UnitaImmobiliare.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Categorie/CategoriaSensore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categorie/CategoriaSensore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Categorie/Rilevazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categorie/Rilevazione.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Contenitori/Attuatore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Attuatore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Contenitori/DatiAttuatore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/DatiAttuatore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Contenitori/Stanza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Stanza.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SistemaDomotico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Applicazione/SistemaDomotico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UnitaImmobiliare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Applicazione/UnitaImmobiliare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/todo" beforeDir="false" afterPath="$PROJECT_DIR$/src/todo" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,6 +28,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -28,6 +42,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1VF0yrgxaqjBQ8u1wmz4oMfOUEO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -64,7 +81,7 @@
       </method>
     </configuration>
     <configuration name="SistemaDomotico" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="SistemaDomotico" />
+      <option name="MAIN_CLASS_NAME" value="Applicazione.SistemaDomotico" />
       <module name="progZan" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -126,5 +143,16 @@
     <state x="449" y="188" width="1022" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" />
     <state x="616" y="380" key="com.intellij.ide.util.TipDialog" />
     <state x="616" y="380" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/DipendenteDalTempo/Regola.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
