@@ -43,6 +43,10 @@ public class UnitaImmobiliare implements java.io.Serializable {
         }
     }
 
+    public void terminaThread(){
+        cycle.terminaThread();
+    }
+
     public void aggiungiStanza() {
         String risposta = null;
         do {

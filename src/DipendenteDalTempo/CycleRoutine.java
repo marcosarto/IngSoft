@@ -23,6 +23,10 @@ public class CycleRoutine implements Runnable {
         }
     }
 
+    public void terminaThread(){
+        t.interrupt();
+    }
+
     @Override
     public void run() {
         do {

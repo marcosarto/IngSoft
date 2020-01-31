@@ -34,6 +34,8 @@ public class MainApp {
             presenteOggetto = new SistemaDomotico();
         }
 
+        presenteOggetto.terminaThreads();
+
         filename = "file.ser";
         try
         {

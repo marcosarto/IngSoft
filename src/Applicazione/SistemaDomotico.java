@@ -35,6 +35,12 @@ public class SistemaDomotico implements Serializable {
         } while (!uscita.equals("y"));
     }
 
+    public void terminaThreads(){
+        for(UnitaImmobiliare u : unitaImmobiliari){
+            u.terminaThread();
+        }
+    }
+
     public void aggiungiUnitaImmobiliare() {
         unitaImmobiliari.add(new UnitaImmobiliare());
 
