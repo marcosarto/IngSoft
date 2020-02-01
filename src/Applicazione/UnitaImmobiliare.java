@@ -43,7 +43,7 @@ public class UnitaImmobiliare implements java.io.Serializable {
         }
     }
 
-    public void terminaThread(){
+    public void terminaThread() {
         cycle.terminaThread();
     }
 
@@ -98,7 +98,11 @@ public class UnitaImmobiliare implements java.io.Serializable {
                             "Inserisci regola",
                             "Stampa regole gia` inserite",
                             "Disattiva regola",
-                            "Attiva regola"
+                            "Attiva regola",
+                            "Disattiva sensore",
+                            "Disattiva attuatore",
+                            "Attiva sensore",
+                            "Attiva attuatore"
                     }, true);
             switch (risposta) {
                 case 0:
@@ -122,33 +126,76 @@ public class UnitaImmobiliare implements java.io.Serializable {
                 case 6:
                     attivaRegola();
                     break;
+                case 7:
+                    attivaDisattivaSensore(false);
+                    break;
+                case 8:
+                    attivaDisattivaAttuatore(false);
+                    break;
+                case 9:
+                    attivaDisattivaSensore(true);
+                    break;
+                case 10:
+                    attivaDisattivaAttuatore(true);
+                    break;
             }
-        }while (risposta!=-1);
+        } while (risposta != -1);
     }
 
-    private void disattivaRegola(){
-        if(cycle!=null)
+    private void attivaDisattivaSensore(boolean attiva) {
+        String risp;
+        do {
+            elencaSensoriUnitaImmobiliare();
+            String risposta = Interazione.domanda("Inserisci nome sensore che vuoi mutare : ");
+            Sensore val = cercaSensoreRestituisciSensore(risposta);
+            if (val != null) {
+                val.setAttivo(attiva);
+            }
+            else
+                System.out.println("Nome sensore non corretto");
+            risp = Interazione.domanda("Vuoi mutare un altro sensore? (y/any key)");
+        } while (risp.equals("y"));
+    }
+
+    private void attivaDisattivaAttuatore(boolean attiva) {
+        String valA;
+        do {
+            elencaAttuatoriUnitaImmobiliare();
+            String risposta = Interazione.domanda("Inserisci nome attuatore che vuoi comandare : ");
+            Attuatore val = cercaAttuatoreRestituisciAttuatore(risposta);
+
+            if (val != null) {
+                val.setAttivo(attiva);
+            }
+            else
+                System.out.println("Il nome attuatore non e` corretto");
+            valA = Interazione.domanda("Vuoi controllare un altro attuatore? (y/any key)");
+        }while(valA.equals("y"));
+    }
+
+    private void disattivaRegola() {
+        if (cycle != null)
             cycle.disattivaRegola();
         else
             System.out.println("Ancora nessuna regola inserita");
     }
 
-    private void attivaRegola(){
-        if(cycle!=null)
+    private void attivaRegola() {
+        if (cycle != null)
             cycle.attivaRegola();
         else
             System.out.println("Ancora nessuna regola inserita");
     }
 
-    private void stampaRegole(){
-        if(cycle!=null)
+    private void stampaRegole() {
+        if (cycle != null)
             cycle.stampaRegole();
         else
             System.out.println("Al momento non son state inserite regole");
     }
 
     private void inserisciRegola() {
-        if(cycle == null)
+        if (cycle == null)
             cycle = new CycleRoutine(this);
         String regola = Interazione.domanda("Inserisci regola 'if antecedente then conseguente' : ");
         cycle.aggiungiRegola(regola);
@@ -329,29 +376,33 @@ public class UnitaImmobiliare implements java.io.Serializable {
         return new Attuatore((CategoriaAttuatore) sistemaDomotico.getCategorieAttuatori().get(cat), nome);
     }
 
+    private void elencaSensoriUnitaImmobiliare() {
+        for (Stanza s : stanze.values()) {
+            System.out.println("Sensori nella stanza " + s.getNome());
+            System.out.println(s.getSensori());
+            System.out.println("Sensori sugli artifatti della stanza " + s.getNome());
+            for (Artefatto a : s.getArtefatti()) {
+                System.out.println(a.getSensori());
+            }
+            System.out.println(Interazione.DELIMITATORE);
+        }
+    }
+
     private void proceduraLetturaSensori() {
         do {
-            for (Stanza s : stanze.values()) {
-                System.out.println("Sensori nella stanza " + s.getNome());
-                System.out.println(s.getSensori());
-                System.out.println("Sensori sugli artifatti della stanza " + s.getNome());
-                for (Artefatto a : s.getArtefatti()) {
-                    System.out.println(a.getSensori());
-                }
-                System.out.println(Interazione.DELIMITATORE);
-            }
+            elencaSensoriUnitaImmobiliare();
             String risposta = Interazione.domanda("Inserisci nome sensore che vuoi ispezionare : ");
             String val = cercaSensoreRestituisciValore(risposta);
             if (!val.isEmpty()) {
                 System.out.println("Il valore del sensore e` : " + val);
-                val = Interazione.domanda("Vuoi controllare un altro sensore? (y/any key)");
-                if (!val.equals("y"))
-                    return;
             }
+            val = Interazione.domanda("Vuoi controllare un altro sensore? (y/any key)");
+            if (!val.equals("y"))
+                return;
         } while (true);
     }
 
-    public String cercaSensoreRestituisciValore(String risposta){
+    public String cercaSensoreRestituisciValore(String risposta) {
         String val = "";
         for (Stanza s : stanze.values()) {
             if (val.isEmpty())
@@ -364,7 +415,7 @@ public class UnitaImmobiliare implements java.io.Serializable {
         return val;
     }
 
-    public Sensore cercaSensoreRestituisciSensore(String risposta){
+    public Sensore cercaSensoreRestituisciSensore(String risposta) {
         Sensore val = null;
         for (Stanza s : stanze.values()) {
             if (val == null)
@@ -377,17 +428,21 @@ public class UnitaImmobiliare implements java.io.Serializable {
         return val;
     }
 
+    public void elencaAttuatoriUnitaImmobiliare(){
+        for (Stanza s : stanze.values()) {
+            System.out.println("Attuatori nella stanza " + s.getNome());
+            System.out.println(s.getAttuatori());
+            System.out.println("Attuatori sugli artifatti della stanza " + s.getNome());
+            for (Artefatto a : s.getArtefatti()) {
+                System.out.println(a.getAttuatori());
+            }
+            System.out.println(Interazione.DELIMITATORE);
+        }
+    }
+
     private void proceduraAttuatori() {
         do {
-            for (Stanza s : stanze.values()) {
-                System.out.println("Attuatori nella stanza " + s.getNome());
-                System.out.println(s.getAttuatori());
-                System.out.println("Attuatori sugli artifatti della stanza " + s.getNome());
-                for (Artefatto a : s.getArtefatti()) {
-                    System.out.println(a.getAttuatori());
-                }
-                System.out.println(Interazione.DELIMITATORE);
-            }
+            elencaAttuatoriUnitaImmobiliare();
             String risposta = Interazione.domanda("Inserisci nome attuatore che vuoi comandare : ");
             Attuatore val = cercaAttuatoreRestituisciAttuatore(risposta);
 
@@ -435,7 +490,7 @@ public class UnitaImmobiliare implements java.io.Serializable {
         } while (true);
     }
 
-    public Attuatore cercaAttuatoreRestituisciAttuatore(String risposta){
+    public Attuatore cercaAttuatoreRestituisciAttuatore(String risposta) {
         Attuatore val = null;
         for (Stanza s : stanze.values()) {
             if (s.ritornaRiferimentoAttuatore(risposta) != null) {

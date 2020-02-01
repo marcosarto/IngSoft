@@ -48,7 +48,10 @@ public abstract class Contenitore implements Serializable {
     public String getSensori(){
         StringBuilder st = new StringBuilder();
         for (String s : sensori.keySet()) {
-            st.append(s + "\n");
+            if (sensori.get(s).isAttivo())
+                st.append("ATTIVO - "+s + "\n");
+            else
+                st.append("DISATTIVO - "+s + "\n");
         }
         return st.toString();
     }
@@ -56,14 +59,22 @@ public abstract class Contenitore implements Serializable {
     public String getAttuatori(){
         StringBuilder st = new StringBuilder();
         for (String s : attuatori.keySet()) {
-            st.append(s + "\n");
+            if (attuatori.get(s).isAttivo())
+                st.append("ATTIVO - "+s + "\n");
+            else
+                st.append("DISATTIVO - "+s+"\n");
         }
         return st.toString();
     }
 
     public String ritornaValoreSensore(String key){
         if(sensori.containsKey(key))
-            return sensori.get(key).getValore();
+            if(sensori.get(key).isAttivo())
+                return sensori.get(key).getValore();
+            else{
+                System.out.println("Il sensore e` disattivo, non produce output");
+                return "";
+            }
         else return "";
     }
 

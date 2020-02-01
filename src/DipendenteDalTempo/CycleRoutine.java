@@ -3,9 +3,7 @@ package DipendenteDalTempo;
 import Applicazione.UnitaImmobiliare;
 import Utility.Interazione;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class CycleRoutine implements Runnable {
