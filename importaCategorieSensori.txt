@@ -1,0 +1,3 @@
+NomeCat-Testo libero-nomeRilevazione-1(numerica) o 2(a stati)-se 1 min/se 2 stato-se 1 max/se 2 nuovo stato-riinizio.
+luce-luce-luce-1-0-100
+umidita-%,%-umiditaPercepita-1-0-100-umiditaReale-1-0-100

@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e0435b15-0de6-41b8-a8c8-e56a255c7bd8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.ser" beforeDir="false" afterPath="$PROJECT_DIR$/file.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/Applicazione/SistemaDomotico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Applicazione/SistemaDomotico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Applicazione/SistemaDomotico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Applicazione/SistemaDomotico.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Applicazione/UnitaImmobiliare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Applicazione/UnitaImmobiliare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DipendenteDalTempo/CycleRoutine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DipendenteDalTempo/CycleRoutine.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

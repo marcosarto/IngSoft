@@ -1,6 +1,5 @@
 package Applicazione;
 
-import Applicazione.UnitaImmobiliare;
 import Categorie.*;
 import Utility.Interazione;
 
@@ -21,7 +20,7 @@ public class SistemaDomotico implements Serializable {
         String uscita = null;
         do {
             int risposta = Interazione.interrogazione("Seleziona la modalita` operativa",
-                    new String[]{"Utente", "Manutentore"},true);
+                    new String[]{"Utente", "Manutentore"}, true);
 
             switch (risposta) {
                 case 0:
@@ -35,15 +34,14 @@ public class SistemaDomotico implements Serializable {
         } while (!uscita.equals("y"));
     }
 
-    public void terminaThreads(){
-        for(UnitaImmobiliare u : unitaImmobiliari){
+    public void terminaThreads() {
+        for (UnitaImmobiliare u : unitaImmobiliari) {
             u.terminaThread();
         }
     }
 
     public void aggiungiUnitaImmobiliare() {
         unitaImmobiliari.add(new UnitaImmobiliare());
-
     }
 
     private int visualizzaElencoUnitaImmobiliari() {
@@ -58,58 +56,95 @@ public class SistemaDomotico implements Serializable {
         }
 
         int risposta = Interazione.interrogazione("Seleziona l'unita' immobiliare che vuoi ispezionare :",
-                entrateUnitaImmobiliare,true);
+                entrateUnitaImmobiliare, true);
         return risposta;
     }
 
-    private boolean aggiungiCategorieSensori() {
-        String risposta = Interazione.domanda("Nome della categoria : ");
-        if (controlloNomiCategoria(risposta, categorieSensori)) {
-            System.out.print("Gia` presente, ritorno alla schermata precedente");
+    private CategoriaSensore creaCatSensore(String nome) {
+        if (controlloNomiCategoria(nome, categorieSensori)) {
+            return null;
+        } else
+            return new CategoriaSensore(nome);
+    }
+
+    private boolean aggiungiDescrizioneCatSensore(CategoriaSensore categoriaSensore, String descr) {
+        if (descr.length() > 180) {
             return false;
         }
-        CategoriaSensore categoriaSensore = new CategoriaSensore(risposta);
-        risposta = Interazione.domanda("Testo libero (massimo 180 caratteri) (unita` di misura dei sensori numerici divisi da ,): ");
-        if (risposta.length() > 180) {
-            System.out.println("Il testo supera la lunghezza massima, ritorno schemata precedente");
-            return false;
-        }
-        categoriaSensore.setDescrizione(risposta);
+        categoriaSensore.setDescrizione(descr);
         categorieSensori.add(categoriaSensore);
+        return true;
+    }
+
+    private Rilevazione creaRilevazioneNumerica(String nome, int min, int max, String unitaDiMisura) {
+        Rilevazione rilevazione = new Rilevazione();
+        rilevazione.setNome(nome);
+        rilevazione.setMinimo(min);
+        rilevazione.setMassimo(max);
+        rilevazione.setUnitaDiMisura(unitaDiMisura);
+        return rilevazione;
+    }
+
+    private Rilevazione creaRilevazioneStati(String nome, String stato) {
+        Rilevazione rilevazione = new Rilevazione();
+        rilevazione.setNome(nome);
+        rilevazione.aggiungiStato(stato);
+        return rilevazione;
+    }
+
+    private void aggiungiRilevazioneStato(Rilevazione rilevazione, String stato) {
+        rilevazione.aggiungiStato(stato);
+    }
+
+
+    private void aggiungiCategorieSensori() {
+        String risposta = Interazione.domanda("Nome della categoria : ");
+        CategoriaSensore categoriaSensore = creaCatSensore(risposta);
+        if (categoriaSensore == null) {
+            System.out.print("Gia` presente, ritorno alla schermata precedente");
+            return;
+        }
+
+        risposta = Interazione.domanda("Testo libero (massimo 180 caratteri) " +
+                "(unita` di misura dei sensori numerici divisi da ,): ");
+        if (!aggiungiDescrizioneCatSensore(categoriaSensore, risposta)) {
+            System.out.println("Il testo supera la lunghezza massima");
+            return;
+        }
 
         int counterRilevazioniPerUnitaMisura = 0;
         String isUscita = null;
         do {
-            risposta = Interazione.domanda("Nome della rilevazione del sensore : ");
-            Rilevazione rilevazione = new Rilevazione();
-            rilevazione.setNome(risposta);
+            String nome;
+            Rilevazione rilevazione = null;
+            nome = Interazione.domanda("Nome della rilevazione del sensore : ");
             int scelta = Interazione.interrogazione("Misura un valore numerico o un dominio discreto? ",
-                    new String[]{"Valore numerico", "Dominio discreto"},false);
+                    new String[]{"Valore numerico", "Dominio discreto"}, false);
             if (scelta == 0) {
                 try {
+                    int min, max;
                     risposta = Interazione.domanda("Minimo rilevabile dal sensore : ");
-                    rilevazione.setMinimo(Integer.valueOf(risposta));
+                    min = Integer.valueOf(risposta);
                     risposta = Interazione.domanda("Massimo rilevabile dal sensore : ");
-                    rilevazione.setMassimo(Integer.valueOf(risposta));
-                    rilevazione.setUnitaDiMisura(categoriaSensore.getUnitaMisura(counterRilevazioniPerUnitaMisura));
-                }catch(Exception e){
+                    max = Integer.valueOf(risposta);
+                    String unitaDiMisura = categoriaSensore.getUnitaMisura(counterRilevazioniPerUnitaMisura);
+                    rilevazione = creaRilevazioneNumerica(nome, min, max, unitaDiMisura);
+                } catch (Exception e) {
                     System.out.println("Devi inserire un numero!");
                     continue;
                 }
             } else if (scelta == 1) {
+                risposta = Interazione.domanda("Inserisci primo elemento del dominio");
+                rilevazione = creaRilevazioneStati(nome, risposta);
                 do {
                     risposta = Interazione.domanda("Inserisci un elemento del dominio (0 per uscire)");
-                    if (risposta.equals("0"))
-                        break;
-                    rilevazione.aggiungiStato(risposta);
+                    if (!risposta.equals("0")) aggiungiRilevazioneStato(rilevazione, risposta);
                 } while (!risposta.equals("0"));
             }
             categoriaSensore.setInformazioni(rilevazione);
             counterRilevazioniPerUnitaMisura++;
             isUscita = Interazione.domanda("Vuoi inserire un'altra rilevazione? (y/any key)");
         } while (isUscita.equals("y"));
-
-        return true;
     }
 
     private boolean aggiungiCategoriaAttuatori() {
@@ -127,13 +162,13 @@ public class SistemaDomotico implements Serializable {
         categorieAttuatori.add(categoriaAttuatore);
         categoriaAttuatore.setDescrizione(risposta);
 
-        String isEsci=null;
+        String isEsci = null;
         do {
             risposta = Interazione.domanda("Nome della modalita` opertiva");
             ModalitaOperativa modalitaOperativa = new ModalitaOperativa();
             modalitaOperativa.setNome(risposta);
             int scelta = Interazione.interrogazione("Modalita` a stati o parametrica?",
-                    new String[]{"A stati", "Parametrica"},false);
+                    new String[]{"A stati", "Parametrica"}, false);
             if (scelta == 0) {
                 do {
                     risposta = Interazione.domanda("Inserisci stati possibili");
@@ -172,7 +207,7 @@ public class SistemaDomotico implements Serializable {
             System.out.println("Non e` ancora stata creata nessuna unita` immobiliare, contatta il manutentore");
         } else {
             int numeroUnitaImmobiliare = visualizzaElencoUnitaImmobiliari();
-            if(numeroUnitaImmobiliare==-1)
+            if (numeroUnitaImmobiliare == -1)
                 return;
             unitaImmobiliari.get(numeroUnitaImmobiliare).flussoFruitore(this);
         }
@@ -185,7 +220,10 @@ public class SistemaDomotico implements Serializable {
                     new String[]{"Aggiungi categorie sensori",
                             "Aggiungi categoria attuatori",
                             "Creare e descrivere l'unita` immobiliare",
-                            "Selezionare un'unita` immobiliare per lavorarci"},true);
+                            "Selezionare un'unita` immobiliare per lavorarci",
+                            "Importa categorie sensori",
+                            "Importa categoria attuatori"
+                    }, true);
             switch (risposta) {
                 case 0:
                     aggiungiCategorieSensori();
@@ -201,10 +239,76 @@ public class SistemaDomotico implements Serializable {
                     if (numeroUnitaImm != -1)
                         unitaImmobiliari.get(numeroUnitaImm).flussoManutentore(this);
                     break;
+                case 4:
+                    importaCategorieSensori();
+                    break;
+//                case 5:
+//                    importaCategorieAttuatori();
+//                    break;
                 default:
                     esci = true;
             }
         } while (!esci);
+    }
+
+    private void aggiungiCatSensoreDaFile(String riga) {
+        String[] campi = riga.split("-");
+        //0 nome 1 descrizione 2 nome rilevazione 3 (1 se numerica 2 se a stati)
+        //caso 3 sia 1 allora 4 min 5 max, da li riinizio come se leggessi il 3
+        //caso 3 sia 2 allora da 4 in poi sono stati del sensore fino a 0, da li riinizio come se leggessi il 3
+        CategoriaSensore categoriaSensore = creaCatSensore(campi[0]);
+        if (categoriaSensore == null) return;
+
+        if (!aggiungiDescrizioneCatSensore(categoriaSensore, campi[1])) return;
+
+        int counterRilevazioniPerUnitaMisura = 0;
+        int pos = 3;
+        boolean esci=false;
+        do {
+            Rilevazione rilevazione=null;
+            if (campi[pos].equals("1")) {
+                try {
+                    String unitaDiMisura = categoriaSensore.getUnitaMisura(counterRilevazioniPerUnitaMisura);
+                    int min = Integer.parseInt(campi[pos + 1]);
+                    int max = Integer.parseInt(campi[pos + 2]);
+                    rilevazione = creaRilevazioneNumerica(campi[pos - 1], min, max, unitaDiMisura);
+                    pos = pos + 4;
+                } catch (Exception e) {
+                    System.out.println("Errore nella conversione del numero");
+                }
+            }
+            else{
+                String elemento = campi[pos+1];
+                rilevazione = creaRilevazioneStati(campi[pos-1], elemento);
+                do {
+                    pos++;
+                    elemento = campi[pos+1];
+                    if (!elemento.equals("0")) aggiungiRilevazioneStato(rilevazione, elemento);
+                } while (!elemento.equals("0"));
+                pos = pos+3;
+            }
+            categoriaSensore.setInformazioni(rilevazione);
+            counterRilevazioniPerUnitaMisura++;
+            if(pos>campi.length) esci = true;
+        } while (!esci);
+
+    }
+
+    public void importaCategorieSensori() {
+        String file = "importaCategorieSensori.txt";
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String daButtare = reader.readLine();
+            String line = reader.readLine();
+            while (line != null) {
+                aggiungiCatSensoreDaFile(line);
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<CategoriaDispositivo> getCategorieSensori() {
