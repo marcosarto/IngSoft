@@ -95,7 +95,10 @@ public class UnitaImmobiliare implements java.io.Serializable {
                     new String[]{"Visualizza piantina unita' immobiliare",
                             "Visualizza valori di sensori specifici",
                             "Agisci sugli attuatori",
-                            "Inserisci regola"
+                            "Inserisci regola",
+                            "Stampa regole gia` inserite",
+                            "Disattiva regola",
+                            "Attiva regola"
                     }, true);
             switch (risposta) {
                 case 0:
@@ -110,8 +113,38 @@ public class UnitaImmobiliare implements java.io.Serializable {
                 case 3:
                     inserisciRegola();
                     break;
+                case 4:
+                    stampaRegole();
+                    break;
+                case 5:
+                    disattivaRegola();
+                    break;
+                case 6:
+                    attivaRegola();
+                    break;
             }
         }while (risposta!=-1);
+    }
+
+    private void disattivaRegola(){
+        if(cycle!=null)
+            cycle.disattivaRegola();
+        else
+            System.out.println("Ancora nessuna regola inserita");
+    }
+
+    private void attivaRegola(){
+        if(cycle!=null)
+            cycle.attivaRegola();
+        else
+            System.out.println("Ancora nessuna regola inserita");
+    }
+
+    private void stampaRegole(){
+        if(cycle!=null)
+            cycle.stampaRegole();
+        else
+            System.out.println("Al momento non son state inserite regole");
     }
 
     private void inserisciRegola() {

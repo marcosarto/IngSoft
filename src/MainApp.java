@@ -34,8 +34,6 @@ public class MainApp {
             presenteOggetto = new SistemaDomotico();
         }
 
-        presenteOggetto.terminaThreads();
-
         filename = "file.ser";
         try
         {
@@ -50,6 +48,7 @@ public class MainApp {
             file.close();
 
             System.out.println("Stato salvato");
+            presenteOggetto.terminaThreads();
 
         }
 

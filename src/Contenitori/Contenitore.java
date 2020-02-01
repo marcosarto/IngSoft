@@ -80,5 +80,4 @@ public abstract class Contenitore implements Serializable {
         else
             return null;
     }
-
 }
