@@ -41,6 +41,16 @@ public abstract class Contenitore implements Serializable {
         return categoriaAttuatoriPresenti;
     }
 
+    public void aggiungiCategoriaSensoriPresenti(String catSensore){
+        if(!categoriaSensoriPresenti.contains(catSensore))
+            categoriaSensoriPresenti.add(catSensore);
+    }
+
+    public void aggiungiCategoriaAttuatoriPresenti(String catAttuatore){
+        if(!categoriaAttuatoriPresenti.contains(catAttuatore))
+            categoriaAttuatoriPresenti.add(catAttuatore);
+    }
+
     public String getNome() {
         return nome;
     }

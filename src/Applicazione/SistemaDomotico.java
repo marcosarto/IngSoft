@@ -96,7 +96,6 @@ public class SistemaDomotico implements Serializable {
         rilevazione.aggiungiStato(stato);
     }
 
-
     private void aggiungiCategorieSensori() {
         String risposta = Interazione.domanda("Nome della categoria : ");
         CategoriaSensore categoriaSensore = creaCatSensore(risposta);
@@ -147,45 +146,72 @@ public class SistemaDomotico implements Serializable {
         } while (isUscita.equals("y"));
     }
 
-    private boolean aggiungiCategoriaAttuatori() {
-        String risposta = Interazione.domanda("Nome della categoria : ");
-        if (controlloNomiCategoria(risposta, categorieAttuatori)) {
-            System.out.print("Gia` presente, ritorno alla schermata precedente");
-            return false;
-        }
-        CategoriaAttuatore categoriaAttuatore = new CategoriaAttuatore(risposta);
-        risposta = Interazione.domanda("Testo libero (massimo 180 caratteri) : ");
-        if (risposta.length() > 180) {
-            System.out.println("Il testo supera la lunghezza massima, ritorno schemata precedente");
-            return false;
-        }
-        categorieAttuatori.add(categoriaAttuatore);
-        categoriaAttuatore.setDescrizione(risposta);
+    private CategoriaAttuatore creaCategoriaAttuatore(String nome) {
+        if (!controlloNomiCategoria(nome, categorieAttuatori))
+            return new CategoriaAttuatore(nome);
+        else
+            return null;
+    }
 
-        String isEsci = null;
+    private boolean aggiungiDescrizioneCatAttuatore(CategoriaAttuatore categoriaAttuatore, String descr) {
+        if (descr.length() > 180)
+            return false;
+        else {
+            categorieAttuatori.add(categoriaAttuatore);
+            categoriaAttuatore.setDescrizione(descr);
+            return true;
+        }
+    }
+
+    private ModalitaOperativa creaModOp(String nome) {
+        ModalitaOperativa op = new ModalitaOperativa();
+        op.setNome(nome);
+        return op;
+    }
+
+    private void aggiungiStato(ModalitaOperativa op, String stato) {
+        op.aggiungiStato(stato);
+    }
+
+    private void aggiungiParametro(ModalitaOperativa op, String nome) {
+        op.addParametro(nome, creaParametro(nome));
+    }
+
+    private void aggiungiCategoriaAttuatori() {
+        String risposta = Interazione.domanda("Nome della categoria : ");
+        CategoriaAttuatore categoriaAttuatore = creaCategoriaAttuatore(risposta);
+        if (categoriaAttuatore == null) {
+            System.out.print("Gia` presente, ritorno alla schermata precedente");
+            return;
+        }
+        risposta = Interazione.domanda("Testo libero (massimo 180 caratteri) : ");
+        if (!aggiungiDescrizioneCatAttuatore(categoriaAttuatore, risposta)) {
+            System.out.println("Il testo supera la lunghezza massima, ritorno schemata precedente");
+            return;
+        }
+
+        String isEsci;
         do {
             risposta = Interazione.domanda("Nome della modalita` opertiva");
-            ModalitaOperativa modalitaOperativa = new ModalitaOperativa();
-            modalitaOperativa.setNome(risposta);
+            ModalitaOperativa modalitaOperativa = creaModOp(risposta);
             int scelta = Interazione.interrogazione("Modalita` a stati o parametrica?",
                     new String[]{"A stati", "Parametrica"}, false);
             if (scelta == 0) {
-                do {
-                    risposta = Interazione.domanda("Inserisci stati possibili");
-                    modalitaOperativa.aggiungiStato(risposta);
-                    risposta = Interazione.domanda("Vuoi aggiungere un nuovo stato possibile? (y/any key)");
-                } while (risposta.equals("y"));
+                risposta = Interazione.domanda("Inserisci stati possibili");
+                while (!risposta.equals("0")) {
+                    aggiungiStato(modalitaOperativa, risposta);
+                    risposta = Interazione.domanda("Inserisci stati possibili (0 per uscire)");
+                }
             } else {
-                do {
-                    risposta = Interazione.domanda("Inserisci nome parametro settabile : ");
-                    modalitaOperativa.addParametro(risposta, creaParametro(risposta));
-                    risposta = Interazione.domanda("Vuoi inserire un altro parametro nell'unita` (y/any key)");
-                } while (risposta.equals("y"));
+                risposta = Interazione.domanda("Inserisci nome parametro settabile : ");
+                while (!risposta.equals("0")) {
+                    aggiungiParametro(modalitaOperativa, risposta);
+                    risposta = Interazione.domanda("Inserisci nome parametro settabile (0 per uscire) : ");
+                }
             }
             categoriaAttuatore.addModalita(modalitaOperativa);
             isEsci = Interazione.domanda("Vuoi aggiungere una nuova modalita` operativa all'attuatore? (y/any key)");
         } while (isEsci.equals("y"));
-        return true;
     }
 
     private Parametro creaParametro(String nome) {
@@ -222,7 +248,8 @@ public class SistemaDomotico implements Serializable {
                             "Creare e descrivere l'unita` immobiliare",
                             "Selezionare un'unita` immobiliare per lavorarci",
                             "Importa categorie sensori",
-                            "Importa categoria attuatori"
+                            "Importa categoria attuatori",
+                            "Importa unita immobiliari"
                     }, true);
             switch (risposta) {
                 case 0:
@@ -240,11 +267,14 @@ public class SistemaDomotico implements Serializable {
                         unitaImmobiliari.get(numeroUnitaImm).flussoManutentore(this);
                     break;
                 case 4:
-                    importaCategorieSensori();
+                    importaCategorieDaFile("importaCategorieSensori.txt", true);
                     break;
-//                case 5:
-//                    importaCategorieAttuatori();
-//                    break;
+                case 5:
+                    importaCategorieDaFile("importaCategorieAttuatori.txt", false);
+                    break;
+                case 6:
+                    importaUnitaImmobiliari();
+                    break;
                 default:
                     esci = true;
             }
@@ -263,9 +293,9 @@ public class SistemaDomotico implements Serializable {
 
         int counterRilevazioniPerUnitaMisura = 0;
         int pos = 3;
-        boolean esci=false;
+        boolean esci = false;
         do {
-            Rilevazione rilevazione=null;
+            Rilevazione rilevazione = null;
             if (campi[pos].equals("1")) {
                 try {
                     String unitaDiMisura = categoriaSensore.getUnitaMisura(counterRilevazioniPerUnitaMisura);
@@ -276,33 +306,64 @@ public class SistemaDomotico implements Serializable {
                 } catch (Exception e) {
                     System.out.println("Errore nella conversione del numero");
                 }
-            }
-            else{
-                String elemento = campi[pos+1];
-                rilevazione = creaRilevazioneStati(campi[pos-1], elemento);
+            } else {
+                String elemento = campi[pos + 1];
+                rilevazione = creaRilevazioneStati(campi[pos - 1], elemento);
                 do {
                     pos++;
-                    elemento = campi[pos+1];
+                    elemento = campi[pos + 1];
                     if (!elemento.equals("0")) aggiungiRilevazioneStato(rilevazione, elemento);
                 } while (!elemento.equals("0"));
-                pos = pos+3;
+                pos = pos + 3;
             }
             categoriaSensore.setInformazioni(rilevazione);
             counterRilevazioniPerUnitaMisura++;
-            if(pos>campi.length) esci = true;
+            if (pos > campi.length) esci = true;
         } while (!esci);
 
     }
 
-    public void importaCategorieSensori() {
-        String file = "importaCategorieSensori.txt";
+    private void aggiungiCatAttuatoreDaFile(String riga) {
+        String[] campi = riga.split("-");
+
+        CategoriaAttuatore categoriaAttuatore = creaCategoriaAttuatore(campi[0]);
+        if (categoriaAttuatore == null) return;
+
+        if (!aggiungiDescrizioneCatAttuatore(categoriaAttuatore, campi[1])) return;
+
+        int pos = 3;
+        boolean esci = false;
+        do {
+            ModalitaOperativa modalitaOperativa = creaModOp(campi[pos - 1]);
+            if (campi[pos].equals("1")) {
+                do {
+                    pos++;
+                    aggiungiStato(modalitaOperativa, campi[pos]);
+                } while (!campi[pos + 1].equals("0"));
+                pos = pos + 2;
+            } else {
+                do {
+                    pos++;
+                    aggiungiParametro(modalitaOperativa, campi[pos]);
+                } while (!campi[pos + 1].equals("0"));
+                pos = pos + 2;
+            }
+            categoriaAttuatore.addModalita(modalitaOperativa);
+            if (!(pos < campi.length)) esci = true;
+        } while (!esci);
+    }
+
+    private void importaCategorieDaFile(String file, boolean sensori) {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(file));
             String daButtare = reader.readLine();
             String line = reader.readLine();
             while (line != null) {
-                aggiungiCatSensoreDaFile(line);
+                if (sensori)
+                    aggiungiCatSensoreDaFile(line);
+                else
+                    aggiungiCatAttuatoreDaFile(line);
                 line = reader.readLine();
             }
             reader.close();
@@ -311,11 +372,103 @@ public class SistemaDomotico implements Serializable {
         }
     }
 
-    public ArrayList<CategoriaDispositivo> getCategorieSensori() {
+    private void importaUnitaImmobiliariRiga(String riga) {
+        String[] campi = riga.split("-");
+        UnitaImmobiliare unitaImmobiliare = new UnitaImmobiliare(campi[0], campi[1]);
+        int pos = 2;
+        if (campi[pos].equals("")) {
+            System.out.println("Devi inserire almeno una stanza riga " + riga + " NON INSERITA");
+            return;
+        }
+        do {
+            String stanzaCorrente = campi[pos];
+            unitaImmobiliare.aggiungiStanzaCode(stanzaCorrente);
+            pos++;
+            if (!campi[pos].equals("")) {
+                do {
+                    //Aggiungo solo le categorie che sono contenute nel sistema domotico ma non lancio errori in caso contrario
+                    //nel caso basterebbe mettere un messaggio nell'else
+                    if (isCategoriaSensorePresente(campi[pos]))
+                        unitaImmobiliare.aggiungiCategoriaSensoreAStanza(stanzaCorrente, campi[pos]);
+                    pos++;
+                } while (!campi[pos].equals("0"));
+            }
+            pos++;
+            if (!campi[pos].equals("")) {
+                do {
+                    if (isCategoriaAttuatorePresente(campi[pos]))
+                        unitaImmobiliare.aggiungiCategoriaAttuatoreAStanza(stanzaCorrente, campi[pos]);
+                    pos++;
+                } while (!campi[pos].equals("0"));
+            }
+            pos++;
+            String artefatto="";
+            if (!campi[pos].equals("")) {
+                artefatto = campi[pos];
+                unitaImmobiliare.aggiungiArtefattoCode(stanzaCorrente, artefatto);
+            }
+            pos++;
+            if (!campi[pos].equals("")) {
+                if(artefatto.equals(""))
+                    System.out.println("Non puoi aggiungere categorie di sensori senza un artefatto riga "+riga+" ERRORE");
+                do {
+                    if (isCategoriaSensorePresente(campi[pos]))
+                        unitaImmobiliare.aggiungiCategoriaSensoreAArtefatto(stanzaCorrente, artefatto, campi[pos]);
+                    pos++;
+                } while (!campi[pos].equals("0"));
+            }
+            pos++;
+            if (!campi[pos].equals("")) {
+                if(artefatto.equals(""))
+                    System.out.println("Non puoi aggiungere categorie di attuatori senza un artefatto riga "+riga+" ERRORE");
+                do {
+                    if (isCategoriaAttuatorePresente(campi[pos]))
+                        unitaImmobiliare.aggiungiCategoriaAttuatoreAArtefatto(stanzaCorrente,artefatto, campi[pos]);
+                    pos++;
+                } while (!campi[pos].equals("0"));
+            }
+            pos++;
+        }while(pos<campi.length);
+        unitaImmobiliari.add(unitaImmobiliare);
+    }
+
+    private void importaUnitaImmobiliari() {
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader("importaUnitaImmobiliari.txt"));
+            String daButtare = reader.readLine();
+            String line = reader.readLine();
+            while (line != null) {
+                importaUnitaImmobiliariRiga(line);
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    ArrayList<CategoriaDispositivo> getCategorieSensori() {
         return categorieSensori;
     }
 
-    public ArrayList<CategoriaDispositivo> getCategorieAttuatori() {
+    ArrayList<CategoriaDispositivo> getCategorieAttuatori() {
         return categorieAttuatori;
+    }
+
+    private boolean isCategoriaSensorePresente(String cat){
+        for(CategoriaDispositivo c : categorieSensori){
+            if(c.getNome().equals(cat))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean isCategoriaAttuatorePresente(String cat){
+        for(CategoriaDispositivo c : categorieAttuatori){
+            if(c.getNome().equals(cat))
+                return true;
+        }
+        return false;
     }
 }

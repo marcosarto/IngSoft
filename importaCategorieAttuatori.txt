@@ -1,0 +1,3 @@
+nome categoria-testo libero-nome mod op-1 se mod a stati 2 se parametrica-se 1 inserisci stati possibili fino a 0 se 2 inserisci parametri fino a 0
+clima-clima-power-1-acceso-spento-0
+tapparella-tapparella-posizione-2-percDiscesa-percInclinazione-0

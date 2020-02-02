@@ -18,6 +18,16 @@ public class Stanza extends Contenitore implements Serializable {
         return true;
     }
 
+    public void aggiungiCategoriaSensoriPresentiSuArtifatto(String artefatto,String catSensore){
+        if(artefatti.containsKey(artefatto))
+            artefatti.get(artefatto).aggiungiCategoriaSensoriPresenti(catSensore);
+    }
+
+    public void aggiungiCategoriaAttuatoriPresentiSuArtifatto(String artefatto,String catAttuatore){
+        if(artefatti.containsKey(artefatto))
+            artefatti.get(artefatto).aggiungiCategoriaAttuatoriPresenti(catAttuatore);
+    }
+
     public boolean aggiungiSensoreSuArtefatto(String arteS,Sensore s){
         return artefatti.get(arteS).aggiungiSensore(s);
     }

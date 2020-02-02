@@ -1,0 +1,2 @@
+nome-tipo-stanza-catsensori-0-catattuatori-0-artefatto-catsensori-0-catattuatori-0-riinizio da stanza (lasciare uno spazio vuoto se non c'e` il campo, se si vuole aggiungere un artefatto all'esterno specificare come stanza 'Esterno')
+smeraldo-condominio-cucina-luce-0-tapparella-0-piedistallo-clima-0- -0

@@ -1,0 +1,2 @@
+if lumos_luce.luce>30 then frozen_clima.power:=acceso
+if lunaticus_luce.luce>30 then frozen_clima.power:=acceso

@@ -11,6 +11,9 @@ import Contenitori.Stanza;
 import DipendenteDalTempo.CycleRoutine;
 import Utility.Interazione;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class UnitaImmobiliare implements java.io.Serializable {
@@ -43,9 +46,24 @@ public class UnitaImmobiliare implements java.io.Serializable {
         }
     }
 
+    public UnitaImmobiliare(String nome, String tipo) {
+        cycle = new CycleRoutine(this);
+        nomeUnitaImmobiliare = nome;
+        tipoUnitaImmobiliare = tipo;
+    }
+
     public void terminaThread() {
-        if(cycle!=null)
+        if (cycle != null)
             cycle.terminaThread();
+    }
+
+    public boolean aggiungiStanzaCode(String stanza) {
+        if (stanze.containsKey(stanza))
+            return false;
+        else {
+            stanze.put(stanza, new Stanza(stanza));
+            return true;
+        }
     }
 
     public void aggiungiStanza() {
@@ -54,16 +72,40 @@ public class UnitaImmobiliare implements java.io.Serializable {
             String stanza = Interazione.domanda("Inserisci nome stanza : ");
 
             //Se c'e` gia almeno una stanza controlla che il nome non sia duplicato
-            if (stanze.containsKey(stanza)) {
+            if (!aggiungiStanzaCode(stanza)) {
                 System.out.println("Nome stanza gia esistente, non aggiunta");
-                continue;
             }
-
-            stanze.put(stanza, new Stanza(stanza));
 
             risposta = Interazione.domanda("Vuoi uscire? (y/any key) : ");
 
         } while (!risposta.equals("y"));
+    }
+
+    public void aggiungiCategoriaSensoreAStanza(String stanza, String catSensore) {
+        stanze.get(stanza).aggiungiCategoriaSensoriPresenti(catSensore);
+    }
+
+    public void aggiungiCategoriaAttuatoreAStanza(String stanza, String catAttuatore) {
+        stanze.get(stanza).aggiungiCategoriaAttuatoriPresenti(catAttuatore);
+    }
+
+    public void aggiungiCategoriaSensoreAArtefatto(String stanza, String artefatto, String catSensore) {
+        if (stanza.contains(stanza))
+            stanze.get(stanza).aggiungiCategoriaSensoriPresentiSuArtifatto(artefatto, catSensore);
+    }
+
+    public void aggiungiCategoriaAttuatoreAArtefatto(String stanza, String artefatto, String catAttuatore) {
+        if (stanza.contains(stanza))
+            stanze.get(stanza).aggiungiCategoriaAttuatoriPresentiSuArtifatto(artefatto, catAttuatore);
+    }
+
+    public boolean aggiungiArtefattoCode(String nomeStanza, String nomeArtefatto) {
+        if (!stanze.get(nomeStanza).aggiungiArtefatto(nomeArtefatto))
+            return false;
+        else {
+            artefatti.put(nomeArtefatto, stanze.get(nomeStanza));
+            return true;
+        }
     }
 
     public void aggiungiArtefatto() {
@@ -76,11 +118,10 @@ public class UnitaImmobiliare implements java.io.Serializable {
 
             int stanzaDaAbbinare = Interazione.interrogazione
                     ("In quale stanza vuoi aggiungere l'artefatto ", elencoStanze, false);
+            String nomeStanzaDaAbbinare = elencoStanze[stanzaDaAbbinare];
 
-            if (!stanze.get(elencoStanze[stanzaDaAbbinare]).aggiungiArtefatto(artefatto))
+            if (!aggiungiArtefattoCode(nomeStanzaDaAbbinare, artefatto))
                 System.out.println("Artefatto gia esistente in questa stanza");
-            else
-                artefatti.put(artefatto, stanze.get(elencoStanze[stanzaDaAbbinare]));
 
             risposta = Interazione.domanda("Vuoi uscire? (y/any key) : ");
 
@@ -151,8 +192,7 @@ public class UnitaImmobiliare implements java.io.Serializable {
             Sensore val = cercaSensoreRestituisciSensore(risposta);
             if (val != null) {
                 val.setAttivo(attiva);
-            }
-            else
+            } else
                 System.out.println("Nome sensore non corretto");
             risp = Interazione.domanda("Vuoi mutare un altro sensore? (y/any key)");
         } while (risp.equals("y"));
@@ -167,11 +207,10 @@ public class UnitaImmobiliare implements java.io.Serializable {
 
             if (val != null) {
                 val.setAttivo(attiva);
-            }
-            else
+            } else
                 System.out.println("Il nome attuatore non e` corretto");
             valA = Interazione.domanda("Vuoi controllare un altro attuatore? (y/any key)");
-        }while(valA.equals("y"));
+        } while (valA.equals("y"));
     }
 
     private void disattivaRegola() {
@@ -196,9 +235,17 @@ public class UnitaImmobiliare implements java.io.Serializable {
     }
 
     private void inserisciRegola() {
+        String regola = Interazione.domanda("Inserisci regola 'if antecedente then conseguente' : ");
+        try {
+            inserisciRegolaCode(regola);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void inserisciRegolaCode(String regola) throws IllegalArgumentException {
         if (cycle == null)
             cycle = new CycleRoutine(this);
-        String regola = Interazione.domanda("Inserisci regola 'if antecedente then conseguente' : ");
         cycle.aggiungiRegola(regola);
     }
 
@@ -211,7 +258,9 @@ public class UnitaImmobiliare implements java.io.Serializable {
                             "Aggiungi artefatti",
                             "Aggiungi sensore",
                             "Aggiungi attuatore",
-                            "Visualizza albero associazioni"}, true);
+                            "Visualizza albero associazioni",
+                            "Importa regole da file"
+                    }, true);
             switch (risposta) {
                 case 0:
                     aggiungiStanza();
@@ -228,11 +277,35 @@ public class UnitaImmobiliare implements java.io.Serializable {
                 case 4:
                     stampaAlberoUnitaImmobiliare();
                     break;
+                case 5:
+                    importaRegoleDaFile();
+                    break;
                 default:
                     esci = true;
                     break;
             }
         } while (!esci);
+    }
+
+    private void importaRegoleDaFile() {
+        String filename = Interazione.domanda("Nome del file contenente le regole? : ");
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(filename));
+            String line = reader.readLine();
+            while (line != null) {
+                try{
+                    inserisciRegolaCode(line);
+                }catch(IllegalArgumentException e){
+                    System.out.println("La riga "+line+" ha generato il seguente errore");
+                    System.out.println(e.getMessage());
+                }
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Il file non esiste, controlla il nome inserito");
+        }
     }
 
     private void aggiungiSensore() {
@@ -429,7 +502,7 @@ public class UnitaImmobiliare implements java.io.Serializable {
         return val;
     }
 
-    public void elencaAttuatoriUnitaImmobiliare(){
+    public void elencaAttuatoriUnitaImmobiliare() {
         for (Stanza s : stanze.values()) {
             System.out.println("Attuatori nella stanza " + s.getNome());
             System.out.println(s.getAttuatori());
