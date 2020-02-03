@@ -101,4 +101,30 @@ public abstract class Contenitore implements Serializable {
         else
             return null;
     }
+
+    public boolean almenoUnAttuatore(boolean attivo){
+        for(Attuatore a: attuatori.values()){
+            if(attivo){
+                if(a.isAttivo())
+                    return true;
+            }
+            else
+            if(!a.isAttivo())
+                return true;
+        }
+        return false;
+    }
+
+    public boolean almenoUnSensore(boolean attivo){
+        for(Sensore a: sensori.values()){
+            if(attivo){
+                if(a.isAttivo())
+                    return true;
+            }
+            else
+            if(!a.isAttivo())
+                return true;
+        }
+        return false;
+    }
 }
