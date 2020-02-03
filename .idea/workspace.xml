@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0435b15-0de6-41b8-a8c8-e56a255c7bd8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file.ser" beforeDir="false" afterPath="$PROJECT_DIR$/file.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progZan/Applicazione/SistemaDomotico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Applicazione/SistemaDomotico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progZan/Applicazione/UnitaImmobiliare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Applicazione/UnitaImmobiliare.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progZan/DipendenteDalTempo/CycleRoutine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/DipendenteDalTempo/CycleRoutine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Applicazione/SistemaDomotico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Applicazione/SistemaDomotico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Applicazione/UnitaImmobiliare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Applicazione/UnitaImmobiliare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contenitori/Stanza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Stanza.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DipendenteDalTempo/CycleRoutine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DipendenteDalTempo/CycleRoutine.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,23 +14,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="Due" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1VF0yrgxaqjBQ8u1wmz4oMfOUEO" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -53,19 +35,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunManager" selected="Application.MainApp">
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -76,7 +46,7 @@
       </method>
     </configuration>
     <configuration name="SistemaDomotico" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Applicazione.SistemaDomotico" />
+      <option name="MAIN_CLASS_NAME" value="SistemaDomotico" />
       <module name="progZan" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -116,27 +86,46 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="555" y="214" width="800" height="684" key="#Project_Structure" />
-    <state x="555" y="214" width="800" height="684" key="#Project_Structure/0.27.1920.1053@0.27.1920.1053" />
-    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
-    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" />
-    <state x="801" y="445" width="308" height="237" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" />
-    <state x="801" y="445" width="308" height="237" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.27.1920.1053@0.27.1920.1053" />
-    <state x="538" y="218" width="824" height="691" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor" />
-    <state x="538" y="218" width="824" height="691" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor/0.27.1920.1053@0.27.1920.1053" />
-    <state x="733" y="321" width="424" height="491" key="FileChooserDialogImpl" />
-    <state x="733" y="321" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" />
-    <state width="1874" height="275" key="GridCell.Tab.0.bottom" />
-    <state width="1874" height="275" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" />
-    <state width="1874" height="275" key="GridCell.Tab.0.center" />
-    <state width="1874" height="275" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" />
-    <state width="1874" height="275" key="GridCell.Tab.0.left" />
-    <state width="1874" height="275" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" />
-    <state width="1874" height="275" key="GridCell.Tab.0.right" />
-    <state width="1874" height="275" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" />
-    <state x="449" y="188" width="1022" height="737" key="SettingsEditor" />
-    <state x="449" y="188" width="1022" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" />
-    <state x="616" y="380" key="com.intellij.ide.util.TipDialog" />
-    <state x="616" y="380" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" />
+    <state x="555" y="214" width="800" height="684" key="#Project_Structure" timestamp="1580717742895" />
+    <state x="555" y="214" width="800" height="684" key="#Project_Structure/0.27.1920.1053@0.27.1920.1053" timestamp="1580717742897" />
+    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580717742897" />
+    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1580717742897" />
+    <state x="673" y="358" width="563" height="397" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580718185632">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="673" y="358" width="563" height="397" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1580718185632" />
+    <state x="801" y="445" width="308" height="237" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1580718165481">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="801" y="445" width="308" height="237" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1580718165481" />
+    <state x="538" y="218" width="824" height="691" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor" timestamp="1580717742897" />
+    <state x="538" y="218" width="824" height="691" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1580717742897" />
+    <state x="733" y="321" width="424" height="491" key="FileChooserDialogImpl" timestamp="1580717742897" />
+    <state x="733" y="321" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1580717742897" />
+    <state width="1874" height="275" key="GridCell.Tab.0.bottom" timestamp="1580717742897" />
+    <state width="1874" height="275" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1580717742897" />
+    <state width="1874" height="275" key="GridCell.Tab.0.center" timestamp="1580717742897" />
+    <state width="1874" height="275" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1580717742897" />
+    <state width="1874" height="275" key="GridCell.Tab.0.left" timestamp="1580717742897" />
+    <state width="1874" height="275" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1580717742897" />
+    <state width="1874" height="275" key="GridCell.Tab.0.right" timestamp="1580717742897" />
+    <state width="1874" height="275" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1580717742897" />
+    <state x="449" y="188" width="1022" height="737" key="SettingsEditor" timestamp="1580717742897" />
+    <state x="449" y="188" width="1022" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1580717742897" />
+    <state x="616" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1580718129363">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="616" y="380" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1580718129363" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/MainApp.java</url>
+          <line>5</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
