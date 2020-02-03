@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0435b15-0de6-41b8-a8c8-e56a255c7bd8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.ser" beforeDir="false" afterPath="$PROJECT_DIR$/file.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/Applicazione/UnitaImmobiliare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/Applicazione/UnitaImmobiliare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progZan/META-INF/progZan.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progZan/META-INF/progZan.kotlin_module" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Applicazione/UnitaImmobiliare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Applicazione/UnitaImmobiliare.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contenitori/Contenitore.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DipendenteDalTempo/CycleRoutine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DipendenteDalTempo/CycleRoutine.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,18 +51,6 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="editing.templates" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Application.MainApp">
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -110,27 +101,45 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="555" y="214" width="800" height="684" key="#Project_Structure" />
-    <state x="555" y="214" width="800" height="684" key="#Project_Structure/0.27.1920.1053@0.27.1920.1053" />
-    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
-    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" />
-    <state x="801" y="445" width="308" height="237" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" />
-    <state x="801" y="445" width="308" height="237" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.27.1920.1053@0.27.1920.1053" />
-    <state x="538" y="218" width="824" height="691" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor" />
-    <state x="538" y="218" width="824" height="691" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor/0.27.1920.1053@0.27.1920.1053" />
-    <state x="733" y="321" width="424" height="491" key="FileChooserDialogImpl" />
-    <state x="733" y="321" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" />
-    <state width="1874" height="275" key="GridCell.Tab.0.bottom" />
-    <state width="1874" height="275" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" />
-    <state width="1874" height="275" key="GridCell.Tab.0.center" />
-    <state width="1874" height="275" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" />
-    <state width="1874" height="275" key="GridCell.Tab.0.left" />
-    <state width="1874" height="275" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" />
-    <state width="1874" height="275" key="GridCell.Tab.0.right" />
-    <state width="1874" height="275" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" />
-    <state x="449" y="188" width="1022" height="737" key="SettingsEditor" />
-    <state x="449" y="188" width="1022" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" />
-    <state x="616" y="380" key="com.intellij.ide.util.TipDialog" />
-    <state x="616" y="380" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" />
+    <state x="555" y="214" width="800" height="684" key="#Project_Structure" timestamp="1580718577892" />
+    <state x="555" y="214" width="800" height="684" key="#Project_Structure/0.27.1920.1053@0.27.1920.1053" timestamp="1580718577892" />
+    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580718577892" />
+    <state x="418" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1580718577892" />
+    <state x="666" y="358" width="577" height="397" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580718841411">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="666" y="358" width="577" height="397" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1580718841411" />
+    <state x="801" y="445" width="308" height="237" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1580718584694">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="801" y="445" width="308" height="237" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1580718584694" />
+    <state x="538" y="218" width="824" height="691" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor" timestamp="1580718577892" />
+    <state x="538" y="218" width="824" height="691" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1580718577892" />
+    <state x="733" y="321" width="424" height="491" key="FileChooserDialogImpl" timestamp="1580718577892" />
+    <state x="733" y="321" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1580718577892" />
+    <state width="1874" height="612" key="GridCell.Tab.0.bottom" timestamp="1580726449912">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="612" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1580726449912" />
+    <state width="1874" height="612" key="GridCell.Tab.0.center" timestamp="1580726449912">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="612" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1580726449912" />
+    <state width="1874" height="612" key="GridCell.Tab.0.left" timestamp="1580726449912">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="612" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1580726449912" />
+    <state width="1874" height="612" key="GridCell.Tab.0.right" timestamp="1580726449912">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="612" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1580726449912" />
+    <state x="449" y="188" width="1022" height="737" key="SettingsEditor" timestamp="1580718577892" />
+    <state x="449" y="188" width="1022" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1580718577892" />
+    <state x="616" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1580718577892" />
+    <state x="616" y="380" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1580718577892" />
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1580724948974">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1580724948974" />
   </component>
 </project>

@@ -44,7 +44,8 @@ public class UnitaImmobiliare implements java.io.Serializable {
     }
 
     public void terminaThread() {
-        cycle.terminaThread();
+        if(cycle!=null)
+            cycle.terminaThread();
     }
 
     public void aggiungiStanza() {
@@ -143,6 +144,10 @@ public class UnitaImmobiliare implements java.io.Serializable {
     }
 
     private void attivaDisattivaSensore(boolean attiva) {
+        if(!almenoUnSensore(!attiva)){
+            System.out.println("Non ci sono sensori da commutare");
+            return;
+        }
         String risp;
         do {
             elencaSensoriUnitaImmobiliare();
@@ -158,7 +163,13 @@ public class UnitaImmobiliare implements java.io.Serializable {
     }
 
     private void attivaDisattivaAttuatore(boolean attiva) {
+        if(!almenoUnAttuatore(!attiva)){
+            System.out.println("Non ci sono attuatori da commutare");
+            return;
+        }
         String valA;
+        boolean ceUnSensore = false;
+
         do {
             elencaAttuatoriUnitaImmobiliare();
             String risposta = Interazione.domanda("Inserisci nome attuatore che vuoi comandare : ");
@@ -358,6 +369,10 @@ public class UnitaImmobiliare implements java.io.Serializable {
             return null;
         }
         int cat = Interazione.interrogazione("Scegli la categoria del sensore", nomiCat, false);
+        if(cercaSensoreRestituisciSensore(nome+"_"+nomiCat[cat])!=null) {
+            System.out.println("Esiste gia un sensore di questa categoria con questo nome");
+            return null;
+        }
         return new Sensore((CategoriaSensore) sistemaDomotico.getCategorieSensori().get(cat), nome);
     }
 
@@ -372,7 +387,10 @@ public class UnitaImmobiliare implements java.io.Serializable {
             return null;
         }
         int cat = Interazione.interrogazione("Scegli la categoria dell'attuatore", nomiCat, false);
-
+        if(cercaAttuatoreRestituisciAttuatore(nome+"_"+nomiCat[cat])!=null) {
+            System.out.println("Esiste gia un attuatore di questa categoria con questo nome");
+            return null;
+        }
         return new Attuatore((CategoriaAttuatore) sistemaDomotico.getCategorieAttuatori().get(cat), nome);
     }
 
@@ -538,6 +556,30 @@ public class UnitaImmobiliare implements java.io.Serializable {
 
     public String getNomeUnitaImmobiliare() {
         return nomeUnitaImmobiliare;
+    }
+
+    private boolean almenoUnAttuatore(boolean attivo){
+        for(Stanza s : stanze.values()){
+            if(s.almenoUnAttuatore(attivo))
+                return true;
+            for(Artefatto a : s.getArtefatti()){
+                if(a.almenoUnAttuatore(attivo))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean almenoUnSensore(boolean attivo){
+        for(Stanza s : stanze.values()){
+            if(s.almenoUnSensore(attivo))
+                return true;
+            for(Artefatto a : s.getArtefatti()){
+                if(a.almenoUnSensore(attivo))
+                    return true;
+            }
+        }
+        return false;
     }
 }
 

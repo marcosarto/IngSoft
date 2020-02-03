@@ -31,6 +31,10 @@ public class CycleRoutine implements Runnable {
 
     public void disattivaRegola(){
         String[] regoleExpr = regole.keySet().toArray(new String[0]);
+        if(regoleExpr.length==0) {
+            System.out.println("Nessuna regola da disattivare");
+            return;
+        }
         int risposta = Interazione.interrogazione("Quale regola vuoi disattivare? : ",
                 regoleExpr,true);
         regoleDisattivate.put(regoleExpr[risposta],regole.get(regoleExpr[risposta]));
@@ -39,6 +43,10 @@ public class CycleRoutine implements Runnable {
 
     public void attivaRegola(){
         String[] regoleExpr = regoleDisattivate.keySet().toArray(new String[0]);
+        if(regoleExpr.length==0) {
+            System.out.println("Nessuna regola da attivare");
+            return;
+        }
         int risposta = Interazione.interrogazione("Quale regola vuoi attivare? : ",
                 regoleExpr,true);
         regole.put(regoleExpr[risposta],regoleDisattivate.get(regoleExpr[risposta]));
